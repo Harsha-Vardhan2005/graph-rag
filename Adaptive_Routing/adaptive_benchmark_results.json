@@ -5,8 +5,8 @@
     "query": "What are Apple's main accounting policies for revenue recognition?",
     "expected_route": "SIMPLE_VECTOR",
     "route_chosen": "SIMPLE_VECTOR",
-    "adaptive_latency_sec": 4.57,
-    "uniform_latency_sec": 12.8,
+    "adaptive_latency_sec": 6.24,
+    "uniform_latency_sec": 17.47,
     "savings_pct": 64.3,
     "answer_preview": "Based on the retrieved filing passages, the specific accounting policy for revenue recognition provided is regarding **d..."
   },
@@ -16,10 +16,10 @@
     "query": "Which regulatory bodies are named in connection with Apple's disclosed net income, and what litigation prompted this?",
     "expected_route": "GRAPH_MULTIHOP",
     "route_chosen": "GRAPH_MULTIHOP",
-    "adaptive_latency_sec": 2.72,
-    "uniform_latency_sec": 3.81,
+    "adaptive_latency_sec": 5.24,
+    "uniform_latency_sec": 7.34,
     "savings_pct": 28.6,
-    "answer_preview": "Based on the provided Knowledge Graph facts, the regulatory bodies named in connection with Apple (aapl) are:\n\n1.  **u.s..."
+    "answer_preview": "Based on the provided Knowledge Graph facts, there is **no information** regarding specific regulatory bodies or litigat..."
   },
   {
     "id": "A3",
@@ -27,10 +27,10 @@
     "query": "What financial market conditions does Apple disclose as negatively impacting its financial metrics?",
     "expected_route": "GRAPH_MULTIHOP",
     "route_chosen": "GRAPH_MULTIHOP",
-    "adaptive_latency_sec": 2.54,
-    "uniform_latency_sec": 3.56,
-    "savings_pct": 28.7,
-    "answer_preview": "Based on the provided Knowledge Graph facts, Apple (aapl) discloses the following financial market conditions as negativ..."
+    "adaptive_latency_sec": 5.33,
+    "uniform_latency_sec": 7.46,
+    "savings_pct": 28.6,
+    "answer_preview": "Based on the provided Knowledge Graph facts, there is **no information** indicating that Apple discloses specific financ..."
   },
   {
     "id": "A4",
@@ -38,9 +38,9 @@
     "query": "What was Apple's Net sales in 2021 and 2022, and what was the YoY percentage growth?",
     "expected_route": "SYMBOLIC_COMPUTE",
     "route_chosen": "SYMBOLIC_COMPUTE",
-    "adaptive_latency_sec": 0.31,
-    "uniform_latency_sec": 0.43,
-    "savings_pct": 27.9,
+    "adaptive_latency_sec": 1.01,
+    "uniform_latency_sec": 1.41,
+    "savings_pct": 28.4,
     "answer_preview": "Based on the verified calculation provided:\n\n*   **FY2021 Net Sales:** $365,817 Million\n*   **FY2022 Net Sales:** $394,3..."
   },
   {
@@ -49,8 +49,8 @@
     "query": "How does Apple describe its business strategy and ecosystem of products?",
     "expected_route": "SIMPLE_VECTOR",
     "route_chosen": "SIMPLE_VECTOR",
-    "adaptive_latency_sec": 0.97,
-    "uniform_latency_sec": 2.72,
+    "adaptive_latency_sec": 1.75,
+    "uniform_latency_sec": 4.9,
     "savings_pct": 64.3,
     "answer_preview": "Based on the retrieved filing passages, Apple describes its business strategy and ecosystem of products as follows:\n\n*  ..."
   },
@@ -60,8 +60,8 @@
     "query": "Which entities or segments does Microsoft hold a stake in that disclose financial metrics?",
     "expected_route": "GRAPH_MULTIHOP",
     "route_chosen": "GRAPH_MULTIHOP",
-    "adaptive_latency_sec": 2.53,
-    "uniform_latency_sec": 3.54,
+    "adaptive_latency_sec": 5.41,
+    "uniform_latency_sec": 7.57,
     "savings_pct": 28.5,
     "answer_preview": "Based on the provided Knowledge Graph facts, there is **no information** indicating that Microsoft (msft) holds a stake ..."
   }

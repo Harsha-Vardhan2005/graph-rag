@@ -144,7 +144,10 @@ async def execute_query(req: QueryRequest):
         "routing": {
             "route": selected_route,
             "confidence": route_decision["confidence"],
-            "reasoning": route_decision["reasoning"]
+            "reasoning": route_decision["reasoning"],
+            "extracted_entities": route_decision.get("metadata", {}).get("extracted_entities", []),
+            "graph_connectivity": route_decision.get("metadata", {}).get("graph_connectivity", {}),
+            "ppr_ranked_triples_count": len(route_decision.get("metadata", {}).get("ppr_ranked_triples", []))
         },
         "execution": {
             "answer": answer,
@@ -183,6 +186,9 @@ async def route_ablation(req: RouteAblationRequest):
         "recommended_route": route_decision["route"].value,
         "reasoning": route_decision["reasoning"],
         "confidence": route_decision["confidence"],
+        "extracted_entities": route_decision.get("metadata", {}).get("extracted_entities", []),
+        "graph_connectivity": route_decision.get("metadata", {}).get("graph_connectivity", {}),
+        "ppr_ranked_triples_count": len(route_decision.get("metadata", {}).get("ppr_ranked_triples", [])),
         "vector_route": {
             "latency_sec": round(t_v, 3),
             "answer": vec_res.get("answer", "")

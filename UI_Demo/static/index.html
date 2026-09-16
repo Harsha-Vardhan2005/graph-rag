@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FinReflectKG: Agentic GraphRAG System</title>
+  <title>Agentic GraphRAG System</title>
   <link rel="stylesheet" href="/static/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
 <body>
   <div class="app-container">
     <!-- Top Header -->
     <header class="app-header">
       <div class="header-main">
         <div class="title-group">
-          <h1>FinReflectKG</h1>
+          <h1>Financial GraphRAG</h1>
           <span class="subtitle">Agentic Knowledge Graph RAG for Financial SEC 10-K Question Answering</span>
         </div>
         <div class="scope-badge">
@@ -32,7 +34,7 @@
 
     <!-- Main Content Area -->
     <main class="main-content">
-      
+
       <!-- ==================== TAB 1: UNIFIED EXPLORER ==================== -->
       <section id="explorer-tab" class="tab-content active">
         <!-- Search & Preset Panel -->
@@ -41,13 +43,15 @@
             <h3>Financial Query Input</h3>
             <span class="hint">Type any custom question or select a verified benchmark prompt</span>
           </div>
-          
+
           <div class="input-wrapper">
-            <input type="text" id="query-input" placeholder="e.g., What are Apple's principal risk factors affecting supply chain?" value="What risk factors and market conditions affect Apple's supply chain and revenue?">
+            <input type="text" id="query-input"
+              placeholder="e.g., What are Apple's principal risk factors affecting supply chain?"
+              value="What risk factors and market conditions affect Apple's supply chain and revenue?">
             <button id="submit-btn" class="btn btn-primary">Execute Query</button>
           </div>
 
-          <!-- Preset Pills -->
+          <!-- Preset Pills
           <div class="presets-container">
             <span class="presets-label">Preset Evaluation Queries:</span>
             <div class="preset-chips">
@@ -77,107 +81,122 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Dynamic Results Display -->
-        <div id="loading-spinner" class="loading-state hidden">
-          <div class="spinner"></div>
-          <p id="loading-text">Routing query and retrieving Knowledge Graph evidence...</p>
-        </div>
-
-        <div id="results-panel" class="results-panel">
-          
-          <!-- Route Decision Banner -->
-          <div class="card route-card" id="route-banner">
-            <div class="route-header">
-              <span class="section-label">Pipeline Execution Route</span>
-              <div class="route-badges">
-                <span id="route-badge" class="badge badge-route">GRAPH_MULTIHOP</span>
-                <span id="confidence-badge" class="badge badge-subtle">Confidence: 95%</span>
-              </div>
-            </div>
-            <p id="route-rationale" class="route-rationale">
-              Detected relational entity keywords; routed to Knowledge Graph Traversal.
-            </p>
+          <!-- Dynamic Results Display -->
+          <div id="loading-spinner" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p id="loading-text">Routing query and retrieving Knowledge Graph evidence...</p>
           </div>
 
-          <!-- Side-by-side Evidence & Answer Cards -->
-          <div class="grid-2col">
-            
-            <!-- Left: Retrieved Evidence Context -->
-            <div class="card evidence-card">
-              <div class="card-header">
-                <h3>Retrieved Evidence Context</h3>
-                <span id="evidence-count-badge" class="badge badge-subtle">12 Triples</span>
+          <div id="results-panel" class="results-panel">
+
+            <!-- Route Decision Banner -->
+            <div class="card route-card" id="route-banner">
+              <div class="route-header">
+                <span class="section-label">Pipeline Execution Route</span>
+                <div class="route-badges">
+                  <span id="route-badge" class="badge badge-route">GRAPH_MULTIHOP</span>
+                  <span id="confidence-badge" class="badge badge-subtle">Confidence: 95%</span>
+                  <span id="connectivity-badge" class="badge badge-emerald">Graph Density: 2,275 Edges</span>
+                  <span id="ppr-badge" class="badge badge-accent">PPR Ranking: Active</span>
+                </div>
               </div>
-              <div id="evidence-viewer" class="evidence-viewer markdown-body">
-                <p class="placeholder-text">Submit a query to inspect retrieved Knowledge Graph evidence tables or SEC text passages.</p>
-              </div>
+              <p id="route-rationale" class="route-rationale">
+                Detected relational entity keywords; routed to Knowledge Graph Traversal.
+              </p>
+              <div id="entities-row" class="entities-tag-row"
+                style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px;"></div>
             </div>
 
-            <!-- Right: Synthesized Answer -->
-            <div class="card answer-card">
-              <div class="card-header">
-                <h3>Synthesized Analysis</h3>
-                <span id="latency-badge" class="badge badge-accent">Latency: --</span>
-              </div>
-              <div id="answer-viewer" class="answer-viewer markdown-body">
-                <p class="placeholder-text">Generated answer will appear here upon query execution.</p>
-              </div>
-            </div>
+            <!-- Side-by-side Evidence & Answer Cards -->
+            <div class="grid-2col">
 
+              <!-- Left: Retrieved Evidence Context -->
+              <div class="card evidence-card">
+                <div class="card-header">
+                  <h3>Retrieved Evidence Context</h3>
+                  <span id="evidence-count-badge" class="badge badge-subtle">12 Triples</span>
+                </div>
+                <div id="evidence-viewer" class="evidence-viewer markdown-body">
+                  <p class="placeholder-text">Submit a query to inspect retrieved Knowledge Graph evidence tables or SEC
+                    text passages.</p>
+                </div>
+              </div>
+
+              <!-- Right: Synthesized Answer -->
+              <div class="card answer-card">
+                <div class="card-header">
+                  <h3>Synthesized Analysis</h3>
+                  <span id="latency-badge" class="badge badge-accent">Latency: --</span>
+                </div>
+                <div id="answer-viewer" class="answer-viewer markdown-body">
+                  <p class="placeholder-text">Generated answer will appear here upon query execution.</p>
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
       </section>
 
       <!-- ==================== TAB 2: ADAPTIVE ROUTING INSPECTOR ==================== -->
       <section id="routing-tab" class="tab-content">
         <div class="card control-card">
           <div class="card-header">
-            <h3>Adaptive Routing Latency Ablation</h3>
-            <span class="hint">Compare Fast-Path Vector Search vs Multi-Hop Graph Traversal</span>
+            <h3>Adaptive Routing & Topology Inspector</h3>
+            <span class="hint">Inspects Entity Extraction, Graph Connectivity Density, and PPR vs Vector Routing</span>
           </div>
           <div class="input-wrapper">
-            <input type="text" id="route-ablation-input" value="What is the general business description and principal products of Apple Inc?">
-            <button id="run-route-ablation-btn" class="btn btn-primary">Compare Routes</button>
+            <input type="text" id="route-ablation-input"
+              value="What risk factors and market conditions affect Apple's supply chain and revenue?">
+            <button id="run-route-ablation-btn" class="btn btn-primary">Inspect Adaptive Routing</button>
           </div>
         </div>
 
         <div id="route-ablation-results" class="ablation-results hidden">
+          <!-- Summary & Topology Signals Card -->
           <div class="card summary-card">
             <div class="summary-stat-group">
               <div class="stat-box">
-                <span class="stat-label">Recommended Route</span>
-                <span id="ablation-rec-route" class="stat-value text-accent">SIMPLE_VECTOR</span>
+                <span class="stat-label">Decision Route</span>
+                <span id="ablation-rec-route" class="stat-value text-accent">GRAPH_MULTIHOP</span>
               </div>
               <div class="stat-box">
-                <span class="stat-label">Fast-Path Latency</span>
-                <span id="ablation-vec-time" class="stat-value text-emerald">0.29s</span>
+                <span class="stat-label">Graph Connectivity</span>
+                <span id="ablation-graph-density" class="stat-value text-emerald">--</span>
               </div>
               <div class="stat-box">
-                <span class="stat-label">Full Graph Latency</span>
-                <span id="ablation-graph-time" class="stat-value text-amber">0.82s</span>
+                <span class="stat-label">PPR Ranking</span>
+                <span id="ablation-ppr-status" class="stat-value text-accent">--</span>
               </div>
               <div class="stat-box">
-                <span class="stat-label">Latency Reduction</span>
-                <span id="ablation-savings" class="stat-value text-emerald">-64.6%</span>
+                <span class="stat-label">Fast-Path Savings</span>
+                <span id="ablation-savings" class="stat-value text-emerald">-64.3%</span>
               </div>
             </div>
-            <p id="ablation-route-reason" class="summary-note"></p>
+
+            <p id="ablation-route-reason" class="summary-note" style="margin-top: 10px;"></p>
+
+            <!-- Extracted Entity Tag Row in Tab 2 -->
+            <div style="margin-top: 12px; border-top: 1px solid rgba(51,65,85,0.4); padding-top: 10px;">
+              <span class="sub-title">Extracted FinReflectKG Entities & Types:</span>
+              <div id="ablation-entities-row" class="entities-tag-row"
+                style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;"></div>
+            </div>
           </div>
 
           <div class="grid-2col">
             <div class="card">
               <div class="card-header">
                 <h4>Route 1: Fast-Path Vector Search</h4>
-                <span class="badge badge-emerald">Low Latency</span>
+                <span id="ablation-vec-badge" class="badge badge-emerald">0.29s</span>
               </div>
               <div id="ablation-vec-answer" class="markdown-body answer-viewer"></div>
             </div>
             <div class="card">
               <div class="card-header">
-                <h4>Route 2: Multi-Hop Graph Traversal</h4>
-                <span class="badge badge-amber">Deep Relational</span>
+                <h4>Route 2: Multi-Hop Graph Traversal (PPR-Ranked)</h4>
+                <span id="ablation-graph-badge" class="badge badge-amber">0.38s</span>
               </div>
               <div id="ablation-graph-answer" class="markdown-body answer-viewer"></div>
             </div>
@@ -193,7 +212,8 @@
             <span class="hint">Compare Raw Flat Graph Triples vs Typed Categorized Markdown Tables</span>
           </div>
           <div class="input-wrapper">
-            <input type="text" id="format-ablation-input" value="Which key financial metrics does Microsoft disclose in its SEC reports?">
+            <input type="text" id="format-ablation-input"
+              value="Which key financial metrics does Microsoft disclose in its SEC reports?">
             <button id="run-format-ablation-btn" class="btn btn-primary">Run Formatting Ablation</button>
           </div>
         </div>
@@ -245,4 +265,5 @@
 
   <script src="/static/app.js"></script>
 </body>
+
 </html>

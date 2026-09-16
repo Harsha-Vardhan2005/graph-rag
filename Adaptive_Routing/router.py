@@ -1,22 +1,30 @@
 """
-Hybrid Adaptive Query Router for Financial GraphRAG
-Classifies incoming financial queries into 3 specialized execution routes:
-  1. SIMPLE_VECTOR     -> Semantic Passage Retrieval (for descriptive, general filing text)
-  2. GRAPH_MULTIHOP    -> Structured Cypher Graph Traversal (for entity relationships, regulations, risk factors)
-  3. SYMBOLIC_COMPUTE  -> Graph Metric Extraction + Symbolic Arithmetic (for multi-year YoY growth, percentage change)
-
-Architecture:
-  - Stage 1: Fast Rule & Regex Intent Filter (0ms latency)
-  - Stage 2: Entity & Metric Grammar Extractor
-  - Stage 3: LLM Intent Classifier Fallback (for nuanced natural language queries)
+Hybrid Adaptive Query Router with Graph Connectivity Signals & PPR Ranking
+Combines:
+  1. Financial Entity Extraction (FinReflectKG schema grounded)
+  2. Graph Connectivity Confidence Scorer (Topology-based routing signals)
+  3. Personalized PageRank (PPR) Subgraph Ranking (NetworkX random-walk ranking)
+  4. Fast-Path Regex & LLM Intent Classifier Fallback
 """
 
 import re
 import os
+import sys
+from pathlib import Path
 from enum import Enum
 from typing import Dict, Any, List, Optional
 from dotenv import load_dotenv, find_dotenv
 from groq import Groq
+
+# Ensure root directory in sys.path
+root_dir = Path(__file__).resolve().parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
+
+# Subsystem modules
+from Adaptive_Routing.entity_extractor import FinancialEntityExtractor
+from Adaptive_Routing.graph_connectivity import GraphConnectivityScorer
+from Adaptive_Routing.ppr_engine import LocalPPRRanker
 
 load_dotenv(find_dotenv(), override=True)
 
@@ -35,6 +43,11 @@ class QueryRouter:
         self.api_key = groq_api_key or GROQ_API_KEY
         self.model = model_name or MODEL_NAME
         self.client = Groq(api_key=self.api_key) if self.api_key else None
+
+        # Initialize topology and extraction engines
+        self.extractor = FinancialEntityExtractor()
+        self.connectivity_scorer = GraphConnectivityScorer()
+        self.ppr_ranker = LocalPPRRanker()
 
         # Relation types present in FinReflectKG
         self.graph_keywords = {
@@ -113,13 +126,19 @@ class QueryRouter:
             if any(k in q_lower for k in ["produce", "product"]):
                 rel_types.extend(["produce", "positively_impacts"])
 
+            final_rels = list(set(rel_types)) or ["discloses"]
+
+            # Compute topological connectivity confidence signal
+            conn_info = self.connectivity_scorer.evaluate_connectivity(ticker, final_rels)
+
             return {
                 "route": RouteType.GRAPH_MULTIHOP,
-                "confidence": 0.90,
-                "reasoning": f"Detected structured relationship intent: {matched_graph_keys[:3]}.",
+                "confidence": conn_info["graph_confidence"],
+                "reasoning": f"Detected structured relation intent: {matched_graph_keys[:3]} (Graph Density Signal: {conn_info['matched_edge_count']} matching edges).",
                 "metadata": {
                     "ticker": ticker,
-                    "relation_types": list(set(rel_types)) or ["discloses"]
+                    "relation_types": final_rels,
+                    "graph_connectivity": conn_info
                 }
             }
 
@@ -149,72 +168,108 @@ Query: "{query}"
 Output ONLY valid JSON in this exact structure:
 {{
   "route": "SIMPLE_VECTOR" | "GRAPH_MULTIHOP" | "SYMBOLIC_COMPUTE",
-  "reasoning": "brief explanation",
-  "ticker": "AAPL" | "MSFT"
+  "confidence": 0.0 to 1.0,
+  "reasoning": "Brief explanation of decision.",
+  "metadata": {{
+    "ticker": "AAPL" | "MSFT",
+    "relation_types": ["discloses" | "regulates" | "subject_to" | "negatively_impacts" | "impacted_by" | "has_stake_in"],
+    "metric_name": "string (optional)",
+    "year_start": 2021 (optional),
+    "year_end": 2022 (optional)
+  }}
 }}"""
 
         try:
+            import json
             resp = self.client.chat.completions.create(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0,
-                max_tokens=150
+                messages=[
+                    {"role": "system", "content": "You are a specialized router for financial queries. Respond ONLY with JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.0,
+                max_tokens=200,
+                response_format={"type": "json_object"}
             )
-            raw = resp.choices[0].message.content.strip()
-            # Clean possible markdown wrapping
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0].strip()
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0].strip()
-
-            parsed = eval(raw) if raw.startswith("{") else {}
+            parsed = json.loads(resp.choices[0].message.content.strip())
             route_str = parsed.get("route", "SIMPLE_VECTOR")
-            route_enum = RouteType(route_str) if route_str in RouteType.__members__ else RouteType.SIMPLE_VECTOR
+            try:
+                route_type = RouteType(route_str)
+            except ValueError:
+                route_type = RouteType.SIMPLE_VECTOR
 
             return {
-                "route": route_enum,
-                "confidence": 0.85,
+                "route": route_type,
+                "confidence": float(parsed.get("confidence", 0.85)),
                 "reasoning": parsed.get("reasoning", "LLM classified intent."),
-                "metadata": {"ticker": parsed.get("ticker", "AAPL")}
+                "metadata": parsed.get("metadata", {})
             }
         except Exception as e:
             return {
                 "route": RouteType.SIMPLE_VECTOR,
                 "confidence": 0.60,
-                "reasoning": f"LLM parsing fallback: {e}",
+                "reasoning": f"LLM classification error ({str(e)}), default to vector fast path.",
                 "metadata": {}
             }
 
     def route(self, query: str) -> Dict[str, Any]:
         """
-        Main entry point for routing a query.
+        Main routing method:
+          1. Extracts FinReflectKG entities
+          2. Applies fast rule path with Graph Connectivity Signals
+          3. Falls back to LLM classifier if ambiguous
+          4. Computes PPR subgraph rankings if GRAPH_MULTIHOP is selected
         """
-        # Fast path first (0ms)
-        fast_result = self._fast_path_classify(query)
-        if fast_result:
-            return fast_result
+        # Step 1: Entity Extraction
+        entity_info = self.extractor.extract_entities(query)
 
-        # LLM fallback
-        return self._llm_classify(query)
+        # Step 2: Fast-Path Rule Evaluation
+        fast_result = self._fast_path_classify(query)
+        if fast_result is not None:
+            decision = fast_result
+        else:
+            # Step 3: LLM Fallback
+            decision = self._llm_classify(query)
+
+        # Attach extracted entity metadata
+        decision["metadata"]["extracted_entities"] = entity_info["entities"]
+        decision["metadata"]["entity_types"] = entity_info["entity_types"]
+
+        # Step 4: If GRAPH_MULTIHOP, compute PPR Triples Ranking
+        if decision["route"] == RouteType.GRAPH_MULTIHOP:
+            ticker = decision["metadata"].get("ticker", entity_info["ticker"])
+            rel_types = decision["metadata"].get("relation_types", ["discloses"])
+            seed_names = [e["name"] for e in entity_info["entities"]] or [ticker.lower()]
+            
+            ranked_triples = self.ppr_ranker.rank_triples_ppr(
+                seed_entities=seed_names,
+                ticker=ticker,
+                relation_types=rel_types,
+                top_k=12
+            )
+            decision["metadata"]["ppr_ranked_triples"] = ranked_triples
+
+        return decision
 
 
 if __name__ == "__main__":
     router = QueryRouter()
     test_queries = [
-        "What are Apple's main accounting policies for revenue recognition?",
-        "Which regulatory bodies are named in connection with Apple's disclosed net income?",
-        "What was Apple's Net sales in 2021 and 2022, and what was the YoY percentage growth?",
-        "Which entities or segments does Microsoft hold a stake in?",
-        "What financial market conditions does Apple disclose as negatively impacting its financial metrics?",
+        "What is the general business description and principal products of Apple Inc?",
+        "What risk factors and market conditions affect Apple's supply chain and revenue?",
+        "What was Apple's percentage change in net sales from 2021 to 2022?",
+        "Which key financial metrics does Microsoft disclose in its SEC reports?"
     ]
 
     print("=" * 70)
-    print("HYBRID ADAPTIVE QUERY ROUTER TEST")
+    print("Testing Upgraded Router with Entity Extractor, Graph Connectivity & PPR")
     print("=" * 70)
     for q in test_queries:
         res = router.route(q)
         print(f"\nQuery: {q}")
-        print(f" -> Route:      {res['route'].value}")
-        print(f" -> Confidence: {res['confidence']}")
-        print(f" -> Reason:     {res['reasoning']}")
-        print(f" -> Metadata:   {res.get('metadata', {})}")
+        print(f"  Route: {res['route'].value} (Confidence: {res['confidence']})")
+        print(f"  Entities: {[e['name'] for e in res['metadata'].get('extracted_entities', [])]}")
+        print(f"  Reasoning: {res['reasoning']}")
+        ppr_sample = res['metadata'].get('ppr_ranked_triples', [])
+        if ppr_sample:
+            print(f"  Top PPR Triplet: {ppr_sample[0]['triple_str']} (Score: {ppr_sample[0]['ppr_score']})")

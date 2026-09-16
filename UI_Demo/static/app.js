@@ -80,6 +80,40 @@ document.addEventListener("DOMContentLoaded", () => {
       confBadge.textContent = `Confidence: ${(routing.confidence * 100).toFixed(0)}%`;
       routeRationale.textContent = routing.reasoning;
 
+      // Graph Connectivity & PPR Badges
+      const connBadge = document.getElementById("connectivity-badge");
+      const pprBadge = document.getElementById("ppr-badge");
+      const entitiesRow = document.getElementById("entities-row");
+
+      const connData = routing.graph_connectivity;
+      if (connData && connData.is_connected) {
+        connBadge.textContent = `Graph Density: ${connData.matched_edge_count} Edges`;
+        connBadge.classList.remove("hidden");
+      } else {
+        connBadge.classList.add("hidden");
+      }
+
+      if (routing.ppr_ranked_triples_count && routing.ppr_ranked_triples_count > 0) {
+        pprBadge.textContent = `PPR Subgraph Ranking: Top ${routing.ppr_ranked_triples_count} Triples`;
+        pprBadge.classList.remove("hidden");
+      } else {
+        pprBadge.classList.add("hidden");
+      }
+
+      // Render Extracted Entities
+      if (routing.extracted_entities && routing.extracted_entities.length > 0) {
+        entitiesRow.innerHTML = routing.extracted_entities.map(e => `
+          <span class="chip" style="font-size: 11px; padding: 2px 8px; border-color: rgba(56,189,248,0.3);">
+            <strong style="color: #38bdf8;">${e.name}</strong> 
+            <span class="chip-type" style="background: rgba(168,85,247,0.2); color: #c084fc; margin-left: 4px;">${e.type}</span>
+          </span>
+        `).join("");
+        entitiesRow.classList.remove("hidden");
+      } else {
+        entitiesRow.innerHTML = "";
+        entitiesRow.classList.add("hidden");
+      }
+
       // Evidence Rendering
       if (routing.route === "GRAPH_MULTIHOP" && execution.evidence_context) {
         evidenceViewer.innerHTML = marked.parse(execution.evidence_context);
@@ -142,12 +176,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
       routeAblationResults.classList.remove("hidden");
       document.getElementById("ablation-rec-route").textContent = data.recommended_route;
-      document.getElementById("ablation-vec-time").textContent = `${data.vector_route.latency_sec}s`;
-      document.getElementById("ablation-graph-time").textContent = `${data.graph_route.latency_sec}s`;
       
+      // Graph Connectivity & PPR Status
+      const densityEl = document.getElementById("ablation-graph-density");
+      if (densityEl) {
+        const edgeCount = (data.graph_connectivity && typeof data.graph_connectivity.matched_edge_count === 'number') 
+          ? data.graph_connectivity.matched_edge_count.toLocaleString() 
+          : "0";
+        densityEl.textContent = `${edgeCount} Edges`;
+      }
+
+      const pprEl = document.getElementById("ablation-ppr-status");
+      if (pprEl) {
+        const count = data.ppr_ranked_triples_count || 0;
+        pprEl.textContent = count > 0 ? `Active (Top ${count})` : "Bypassed (Vector)";
+      }
+
       const savingsEl = document.getElementById("ablation-savings");
       savingsEl.textContent = `${data.latency_savings_pct > 0 ? '-' : ''}${Math.abs(data.latency_savings_pct)}%`;
       document.getElementById("ablation-route-reason").textContent = `Routing Rationale: ${data.reasoning}`;
+
+      // Tab 2 Entities Row
+      const tab2EntitiesRow = document.getElementById("ablation-entities-row");
+      if (tab2EntitiesRow) {
+        if (data.extracted_entities && data.extracted_entities.length > 0) {
+          tab2EntitiesRow.innerHTML = data.extracted_entities.map(e => `
+            <span class="chip" style="font-size: 11px; padding: 2px 8px; border-color: rgba(56,189,248,0.3);">
+              <strong style="color: #38bdf8;">${e.name}</strong> 
+              <span class="chip-type" style="background: rgba(168,85,247,0.2); color: #c084fc; margin-left: 4px;">${e.type}</span>
+            </span>
+          `).join("");
+        } else {
+          tab2EntitiesRow.innerHTML = `<span style="font-size: 12px; color: #94a3b8;">No complex graph entities required for simple vector lookup.</span>`;
+        }
+      }
+
+      const vecBadge = document.getElementById("ablation-vec-badge");
+      if (vecBadge) vecBadge.textContent = `${data.vector_route.latency_sec}s`;
+      const graphBadge = document.getElementById("ablation-graph-badge");
+      if (graphBadge) graphBadge.textContent = `${data.graph_route.latency_sec}s`;
 
       document.getElementById("ablation-vec-answer").innerHTML = marked.parse(data.vector_route.answer);
       document.getElementById("ablation-graph-answer").innerHTML = marked.parse(data.graph_route.answer);
@@ -155,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error running route ablation: " + err.message);
     } finally {
       runRouteAblationBtn.disabled = false;
-      runRouteAblationBtn.textContent = "Compare Routes";
+      runRouteAblationBtn.textContent = "Inspect Adaptive Routing";
     }
   });
 

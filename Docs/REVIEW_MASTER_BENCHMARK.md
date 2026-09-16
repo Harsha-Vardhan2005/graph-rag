@@ -15,7 +15,19 @@ This document consolidates all empirical benchmarks, architectural contributions
                                                 |
                                                 v
                       +----------------------------------------------------+
-                      |    1. Hybrid Adaptive Query Router (Fast-Path)    |
+                      |   1. Financial Entity Extraction & Linking         |
+                      |      (FinReflectKG Schema: ORG, METRIC, REG, RISK) |
+                      +----------------------------------------------------+
+                                                |
+                                                v
+                      +----------------------------------------------------+
+                      |   2. Graph Connectivity Signal (Topology Density)  |
+                      |      Confidence Scorer: S_conn in [0.0, 1.0]       |
+                      +----------------------------------------------------+
+                                                |
+                                                v
+                      +----------------------------------------------------+
+                      |   3. Hybrid Adaptive Query Router (Fast-Path)      |
                       +----------------------------------------------------+
                          /                      |                        \
         [Descriptive Query]            [Relational Query]       [Arithmetic Query]
@@ -23,12 +35,13 @@ This document consolidates all empirical benchmarks, architectural contributions
                  v                              v                        v
     +-------------------------+    +-------------------------+   +-------------------------+
     | Route 1: Vector RAG    |    | Route 2: Graph Multihop |   | Route 3: Symbolic Math  |
-    | (Dense Embedding Chunks)|    | (Cypher / KG Traversal) |   | (Deterministic Engine)  |
+    | (Dense Embedding Chunks)|    | + Personalized PageRank |   | (Deterministic Engine)  |
+    |                         |    |   (PPR Random-Walk Walk)|   |                         |
     +-------------------------+    +-------------------------+   +-------------------------+
                  |                              |                        |
                  |                              v                        |
                  |                 +-------------------------+           |
-                 |                 | 2. Structured Evidence  |           |
+                 |                 | 4. Structured Evidence  |           |
                  |                 | Formatting (Typed Tables)|           |
                  |                 +-------------------------+           |
                  \                              |                       /
