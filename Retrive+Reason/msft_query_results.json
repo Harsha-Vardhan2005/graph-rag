@@ -1,0 +1,126 @@
+{
+  "chains": [
+    {
+      "entity2": "amy e. hood",
+      "type2": "PERSON",
+      "entity3": "net income",
+      "chunk2": "| Name | Age | Position with the Company | |--------------------------|-------|------------------------------------------------------------------------------------------| | Satya Nadella | 52 | Chief Executive Officer | | Christopher C. Capossela | 50 | Executive Vice President, Marketing and Consumer Business, and Chief Marketing Officer | | Jean-Philippe Courtois | 59 | Executive Vice President and President, Microsoft Global Sales, Marketing and Operations | | Kathleen T. Hogan | 54 | Executive Vice President, Human Resources | | Amy E. Hood | 48 | Executive Vice President, Chief Financial Officer | | Bradford L. Smith | 61 | President and Chief Legal Officer |",
+      "source2": "MSFT_10k_2020.pdf",
+      "year2": 2020
+    },
+    {
+      "entity2": "productivity and business process",
+      "type2": "SEGMENT",
+      "entity3": "revenue",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "intelligent cloud",
+      "type2": "SEGMENT",
+      "entity3": "revenue",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "more personal computing",
+      "type2": "SEGMENT",
+      "entity3": "revenue",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "productivity and business process",
+      "type2": "SEGMENT",
+      "entity3": "operate income",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "intelligent cloud",
+      "type2": "SEGMENT",
+      "entity3": "operate income",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "more personal computing",
+      "type2": "SEGMENT",
+      "entity3": "operate income",
+      "chunk2": "| Year Ended June 30, | 2024 | 2023 | 2022 | |--------------------------------------|-----------|-----------|-----------| | Revenue | | | | | Productiv ity and Business Processes | $ 77,728 | $ 69,274 | $ 63,364 | | Intelligent Cloud | 105,362 | 87,907 | 74,965 | | More Personal Computing | 62,032 | 54,734 | 59,941 | | Total | $ 245,122 | $ 211,915 | $ 198,270 | | Operating Income | | | | | Productiv ity and Business Processes | $ 40,540 | $ 34,189 | $ 29,690 | | Intelligent Cloud | 49,584 | 37,884 | 33,203 | | More Personal Computing | 19,309 | 16,450 | 20,490 | | Total | $ 109,433 | $ 88,523 | $ 83,383 |",
+      "source2": "MSFT_10k_2024.pdf",
+      "year2": 2024
+    },
+    {
+      "entity2": "d & c licensing",
+      "type2": "SEGMENT",
+      "entity3": "patent licensing revenue",
+      "chunk2": "## Table of Contents ## PART II Item 7 ## Devices and Consumer ('D&amp;C') Our D&amp;C segments develop, manufacture, market, and support products and serv ices designed to entertain and connect people, increase personal productiv ity, help people simplify tasks and make more informed decisions online, and help adv ertisers connect with audiences. Our D&amp;C segments are: - D&amp;C Licensing , comprising: Windows, including all OEM licensing ('Windows OEM') and other non-v olume licensing and academic v olume licensing of the Windows operating system and related software; non-v olume licensing of Microsoft Office, comprising the core Office product set, for consumers ('Office Consumer'); Windows Phone operating system, including related patent licensing; and certain other patent licensing rev enue; - Computing and Gaming Hardware , comprising: X box gaming and entertainment consoles and accessories, second-party and third-party video game royalties, and X box Liv e subscriptions ('X box Platform'); Surface dev ices and accessories; and Microsoft PC accessories; - Phone Hardware, comprising: Lumia Smartphones and other non-Lumia phones, beginning with our acquisition of NDS; and - D&amp;C Other , comprising: Resale, including Windows Store, X box Liv e transactions, and Windows Phone Store; search adv ertising; display advertising; Office 365 Consumer, comprising Office 365 Home and Office 365 Personal; Studios, comprising first-party v ideo games; our retail stores; and certain other consumer products and serv ices not included in the categories abov e. ## Commercial Our Commercial segments develop, market, and support software and serv ices designed to increase indiv idual, team, and organizational productiv ity and efficiency, including simplifying ev eryday tasks through seamless operations across the user's hardware and software. Our Commercial segments are: - Commercial Licensing , comprising: serv er products, including Windows Serv er, Microsoft SQL Serv er, Visual Studio, System Center, and related Client Access Licenses ('CALs'); Windows Embedded; v olume licensing of the Windows operating system, excluding academic ('Windows Commercial'); Microsoft Office for business, including Office, Exchange, SharePoint, Lync, and related CALs ('Office Commercial'); Microsoft Dynamics business solutions, excluding Dynamics CRM Online; and Skype; and - Commercial Other , comprising: Enterprise Serv ices, including Premier Support Serv ices and Microsoft Consulting Serv ices; Commercial Cloud, comprising Office 365 Commercial, other Microsoft Office online offerings, Dynamics CRM Online, and Microsoft Azure; and certain other commercial products and online serv ices not included in the categories abov e. ## SUMMARY RESULTS OF OPERATIONS",
+      "source2": "MSFT_10k_2014.pdf",
+      "year2": 2014
+    },
+    {
+      "entity2": "u.s. government and agency security",
+      "type2": "FIN_INST",
+      "entity3": "5011",
+      "chunk2": "| | Less than 12 Months | Less than 12 Months | 12 Months or Greater | 12 Months or Greater | | | |---------------------------------------|-----------------------|-----------------------|------------------------|------------------------|------------------|-------------------------| | (In millions) | Fair Value | Unrealized Losses | Fair Value | Unrealized Losses | Total Fair Value | Total Unrealized Losses | | June 30, 2014 | | | | | | | | U.S. government and agency securities | $ 4,161 | $ (29) | $ 850 | $ 0 | $ 5,011 | $ (29) | | Foreign government bonds | 566 | (4) | 21 | (6) | 587 | (10) | | Mortgage- and asset-backed securities | 120 | 0 | 61 | (2) | 181 | (2) | | Corporate notes and bonds | 1,154 | (8) | 34 | (1) | 1,188 | (9) | | Common and preferred stock | 463 | (48) | 257 | (33) | 720 | (81) | | Total | $ 6,464 | $ (89) | $ 1,223 | $ (42) | $ 7,687 | $ (131) |",
+      "source2": "MSFT_10k_2015.pdf",
+      "year2": 2015
+    },
+    {
+      "entity2": "u.s. government and agency security",
+      "type2": "FIN_INST",
+      "entity3": "fair value of 86,811 million",
+      "chunk2": "| | Less than 12 Months | Less than 12 Months | 12 Months or Greater | 12 Months or Greater | | | |---------------------------------------|-----------------------|-----------------------|------------------------|------------------------|------------------|-------------------------| | (In millions) | Fair Value | Unrealized Losses | Fair Value | Unrealized Losses | Total Fair Value | Total Unrealized Losses | | June 30, 2018 | | | | | | | | U.S. government and agency securities | $ 82,352 | $ (1,064) | 4,459 | $ (103) | $ 86,811 | $ (1,167) | | Foreign government bonds | 3,457 | (7) | 13 | (3) | 3,470 | (10) | | Mortgage- and asset-backed securities | 2,072 | (9) | 96 | (4) | 2,168 | (13) | | Corporate notes and bonds | 3,111 | (43) | 301 | (13) | 3,412 | (56) | | Municipal securities | 45 | (1) | 0 | 0 | 45 | (1) | | Total | $ 91,037 | $ (1,124) | 4,869 | $ (123) | $ 95,906 | $ (1,247) |",
+      "source2": "MSFT_10k_2019.pdf",
+      "year2": 2019
+    }
+  ],
+  "revenue_chunks": [
+    {
+      "metric": "net income",
+      "chunk": "| Year Ended June 30, | 2014 (a) | 2013 | | 2012 | 2011 | 2010 | |-----------------------------------------------------|--------------|-----------|-----|--------------|-----------|----------| | Revenue | $ 86,833 | $ 77,849 | | $ 73,723 | $ 69,943 | $ 62,484 | | Operating income | $ 27,759 | $ 26,764 | (c) | $ 21,763 (d) | $ 27,161 | $ 24,098 | | Net income | $ 22,074 (b) | $ 21,863 | (c) | $ 16,978 (d) | $ 23,150 | $ 18,760 | | Diluted earnings per share | $ 2.63 (b) | $ 2.58 | (c) | $ 2.00 (d) | $ 2.69 | $ 2.10 | | Cash div idends declared per share | $ 1.12 | $ 0.92 | | $ 0.80 | $ 0.64 | $ 0.52 | | Cash, cash equiv alents, and short-term investments | $ 85,709 | $ 77,022 | | $ 63,040 | $ 52,772 | $ 36,788 | | Total assets | $ 172,384 | $ 142,431 | | $ 121,271 | $ 108,704 | $ 86,113 | | Long-term obligations | $ 36,975 | $ 26,070 | | $ 22,220 | $ 22,847 | $ 13,791 | | Stockholders' equity | $ 89,784 | $ 78,944 | | $ 66,363 | $ 57,083 | $ 46,175 |",
+      "source": "MSFT_10k_2014.pdf",
+      "year": 2014,
+      "start": "July 2013",
+      "end": "June 2014"
+    },
+    {
+      "metric": "net income",
+      "chunk": "| Year Ended June 30, | 2014 | 2013 | |----------------------------|----------|----------| | Revenue | $ 96,248 | $ 93,243 | | Net income | $ 20,234 | $ 20,153 | | Diluted earnings per share | $ 2.41 | $ 2.38 |",
+      "source": "MSFT_10k_2014.pdf",
+      "year": 2014,
+      "start": "July 2012",
+      "end": "June 2013"
+    },
+    {
+      "metric": "net income",
+      "chunk": "| (In millions, except per share amounts) Year Ended June 30, | 2022 | 2021 | 2020 | |---------------------------------------------------------------|----------|----------|----------| | Revenue: | | | | | Product | $ 72,732 | $ 71,074 | $ 68,041 | | Service and other | 125,538 | 97,014 | 74,974 | | Total revenue | 198,270 | 168,088 | 143,015 | | Cost of revenue: | | | | | Product | 19,064 | 18,219 | 16,017 | | Service and other | 43,586 | 34,013 | 30,061 | | Total cost of revenue | 62,650 | 52,232 | 46,078 | | Gross margin | 135,620 | 115,856 | 96,937 | | Research and development | 24,512 | 20,716 | 19,269 | | Sales and marketing | 21,825 | 20,117 | 19,598 | | General and administrative | 5,900 | 5,107 | 5,111 | | Operating income | 83,383 | 69,916 | 52,959 | | Other income, net | 333 | 1,186 | 77 | | Income before income taxes | 83,716 | 71,102 | 53,036 | | Provision for income taxes | 10,978 | 9,831 | 8,755 | | Net income | $ 72,738 | $ 61,271 | $ 44,281 | | Earnings per share: | | | | | Basic | $ 9.70 | $ 8.12 | $ 5.82 | | Diluted | $ 9.65 | $ 8.05 | $ 5.76 | | Weighted average shares outstanding: | | | | | Basic | 7,496 | 7,547 | 7,610 | | Diluted | 7,540 | 7,608 | 7,683 |",
+      "source": "MSFT_10k_2022.pdf",
+      "year": 2022,
+      "start": "July 2022",
+      "end": "June 2023"
+    },
+    {
+      "metric": "net income",
+      "chunk": "| (In millions, except percentages and per share amounts) | 2024 | 2023 | Percentage Change | |-----------------------------------------------------------|-----------|-----------|---------------------| | Revenue | $ 245,122 | $ 211,915 | 16% | | Gross margin | 171,008 | 146,052 | 17% | | Operating income | 109,433 | 88,523 | 24% | | Net income | 88,136 | 72,361 | 22% | | Diluted earnings per share | 11.80 | 9.68 | 22% | | Adjusted gross margin (non-GAAP) | 171,008 | 146,204 | 17% | | Adjusted operating income (non-GAAP) | 109,433 | 89,694 | 22% | | Adjusted net income (non-GAAP) | 88,136 | 73,307 | 20% | | Adjusted diluted earnings per share (non-GAAP) | 11.80 | 9.81 | 20% |",
+      "source": "MSFT_10k_2024.pdf",
+      "year": 2024,
+      "start": "January 2024",
+      "end": "December 2024"
+    },
+    {
+      "metric": "net income",
+      "chunk": "| Year Ended June 30, | 2015 | 2014 (b) | 2013 | 2012 | 2011 | |-----------------------------------------------------|--------------|------------|--------------|--------------|-----------| | Revenue | $ 93,580 | $ 86,833 | $ 77,849 | $ 73,723 | $ 69,943 | | Gross margin | $ 60,542 | $ 59,755 | $ 57,464 | $ 56,193 | $ 54,366 | | Operating income | $ 18,161 (a) | $ 27,759 | $ 26,764 (c) | $ 21,763 (d) | $ 27,161 | | Net income | $ 12,193 (a) | $ 22,074 | $ 21,863 (c) | $ 16,978 (d) | $ 23,150 | | Diluted earnings per share | $ 1.48 (a) | $ 2.63 | $ 2.58 (c) | $ 2.00 (d) | $ 2.69 | | Cash div idends declared per share | $ 1.24 | $ 1.12 | $ 0.92 | $ 0.80 | $ 0.64 | | Cash, cash equiv alents, and short-term investments | $ 96,526 | $ 85,709 | $ 77,022 | $ 63,040 | $ 52,772 | | Total assets | $ 176,223 | $ 172,384 | $ 142,431 | $ 121,271 | $ 108,704 | | Long-term obligations | $ 46,282 | $ 36,975 | $ 26,070 | $ 22,220 | $ 22,847 | | Stockholders' equity | $ 80,083 | $ 89,784 | $ 78,944 | $ 66,363 | $ 57,083 |",
+      "source": "MSFT_10k_2015.pdf",
+      "year": 2015,
+      "start": "July 2014",
+      "end": "June 2015"
+    }
+  ]
+}

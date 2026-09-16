@@ -1,0 +1,61 @@
+# =======================================================
+# FinReflectKG - Git Ignore Configuration
+# =======================================================
+
+# 1. Credentials & Secrets (CRITICAL)
+.env
+*.env
+*.pem
+*.key
+
+# 2. Large Datasets (>100MB exceeds GitHub push limits)
+*.csv
+finreflectkg_aapl_msft.csv
+
+# 3. Binary Cache Files & Generated Embeddings
+*.npy
+*.npz
+aapl_embeddings.npy
+aapl_chunks.json
+
+# 4. Python Environment & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 5. Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 6. IDEs & Agent Metadata
+.vscode/
+.idea/
+.gemini/
+.agents/
+.system_generated/
+*.log
+
+# 7. OS Metadata
+.DS_Store
+Thumbs.db

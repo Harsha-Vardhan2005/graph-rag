@@ -1,0 +1,134 @@
+[
+  {
+    "id": "E1",
+    "category": "Regulatory Prioritization",
+    "query": "Which regulatory bodies oversee Apple regarding its financial disclosures?",
+    "raw_baseline": {
+      "answer": "Based on the provided Knowledge Graph evidence, the regulatory bodies that oversee Apple (AAPL) are:\n\n*   **SEC** (Securities and Exchange Commission)\n*   **U.S. Department of Justice**\n\n**Evidence:**\n*   `[ORG_REG] sec --regulates--> [ORG] aapl`\n*   `[ORG_REG] u.s. department of justice --regulates--> [ORG] aapl`",
+      "latency_sec": 0.59,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "structured_proposed": {
+      "answer": "Based on the provided Knowledge Graph evidence, the regulatory bodies that oversee **Apple (aapl)** are:\n\n1.  **sec** `[ORG_REG]`\n2.  **u.s. department of justice** `[ORG_REG]`\n\nBoth entities are explicitly linked to **aapl** via the `regulates` relationship in the **Regulatory & Oversight Bodies** section.",
+      "latency_sec": 0.32,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "deltas": {
+      "recall_gain": 0.0,
+      "distractor_resistance_gain": 0.0,
+      "structure_gain": 0.0,
+      "latency_reduction_pct": 45.8
+    }
+  },
+  {
+    "id": "E2",
+    "category": "Market Risk vs General Concepts",
+    "query": "What financial market conditions does Apple disclose as negatively impacting its financial metrics?",
+    "raw_baseline": {
+      "answer": "Based on the provided Knowledge Graph evidence, the financial market conditions that negatively impact Apple (AAPL) are:\n\n*   **Liquidity**\n*   **Credit market**\n\nThese are the only entities in the evidence explicitly linked to Apple via the `negatively_impacts` relationship.",
+      "latency_sec": 0.24,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "structured_proposed": {
+      "answer": "Based on the provided Knowledge Graph evidence, the financial market conditions that **Apple** (`aapl`) discloses as negatively impacting its financial metrics are:\n\n1.  **Liquidity**\n2.  **Credit market**\n\n**Evidence:**\n*   `liquidity` `[FIN_MARKET]` `negatively_impacts` **aapl** `[ORG]`\n*   `credit market` `[FIN_MARKET]` `negatively_impacts` **aapl** `[ORG]`",
+      "latency_sec": 0.35,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "deltas": {
+      "recall_gain": 0.0,
+      "distractor_resistance_gain": 0.0,
+      "structure_gain": 0.0,
+      "latency_reduction_pct": -45.8
+    }
+  },
+  {
+    "id": "E3",
+    "category": "Litigation vs General Requirements",
+    "query": "What specific litigation proceeding is Apple subject to regarding antitrust?",
+    "raw_baseline": {
+      "answer": "Based on the provided Knowledge Graph evidence, the specific litigation proceeding Apple (AAPL) is subject to regarding antitrust is:\n\n**apple ebooks antitrust litigation**\n\n*Evidence:* `[LITIGATION] apple ebooks antitrust litigation --subject_to--> [ORG] aapl`",
+      "latency_sec": 0.23,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "1/1",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "structured_proposed": {
+      "answer": "Based on the provided Knowledge Graph evidence, the specific litigation proceeding Apple is subject to regarding antitrust is:\n\n**apple ebooks antitrust litigation**\n\n*   **Source Entity:** `apple ebooks antitrust litigation` `[LITIGATION]`\n*   **Relationship:** `subject_to`\n*   **Target Entity:** **aapl** `[ORG]`",
+      "latency_sec": 0.3,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "1/1",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "deltas": {
+      "recall_gain": 0.0,
+      "distractor_resistance_gain": 0.0,
+      "structure_gain": 0.0,
+      "latency_reduction_pct": -30.4
+    }
+  },
+  {
+    "id": "E4",
+    "category": "Financial Metric Disclosures",
+    "query": "Which key financial metrics does Microsoft disclose in its SEC reports?",
+    "raw_baseline": {
+      "answer": "Based on the provided Knowledge Graph evidence, the key financial metrics that Microsoft (MSFT) discloses are:\n\n*   **Net income**\n*   **Operate income**\n\n*(Note: While \"stock-based compensation\" is listed as an accounting policy disclosed by MSFT, it is categorized as an [ACCOUNTING_POLICY] rather than a [FIN_METRIC] in the evidence.)*",
+      "latency_sec": 0.28,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 66.7,
+        "distractor_mentions": 1,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "structured_proposed": {
+      "answer": "Based on the provided Knowledge Graph evidence, the key financial metrics that **Microsoft** (`msft`) discloses in its SEC reports are:\n\n*   **Net income**\n*   **Operate income**\n\nThese are explicitly listed under the `[METRICS]` section as `FIN_METRIC` entities that `disclose` the organization **msft**.",
+      "latency_sec": 0.28,
+      "metrics": {
+        "target_recall_pct": 100.0,
+        "target_hits": "2/2",
+        "distractor_resistance_pct": 100.0,
+        "distractor_mentions": 0,
+        "structure_score_out_of_10": 10.0
+      }
+    },
+    "deltas": {
+      "recall_gain": 0.0,
+      "distractor_resistance_gain": 33.3,
+      "structure_gain": 0.0,
+      "latency_reduction_pct": 0.0
+    }
+  }
+]

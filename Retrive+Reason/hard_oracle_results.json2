@@ -1,0 +1,100 @@
+{
+  "model": "llama-3.1-8b-instant",
+  "evidence_pool_size": 100,
+  "numeric_accuracy": 0.8888888888888888,
+  "flagged": [
+    "hard_4"
+  ],
+  "results": [
+    {
+      "id": "hard_1",
+      "question": "What was Microsoft's total revenue growth in dollar terms from fiscal year 2020 to fiscal year 2024?",
+      "difficulty": "cross_document_multihop",
+      "gold_answer": "$102,107 million ($245,122M - $143,015M)",
+      "model_extracted_answer": "$102,107 million",
+      "is_correct": true,
+      "full_raw_output": "To find Microsoft's total revenue growth in dollar terms from fiscal year 2020 to fiscal year 2024, I will use the following triples:\n\n- (msft, has_total_revenue_fy2020, $143,015 million)\n- (msft, has_total_revenue_fy2024, $245,122 million)\n\nThe calculation is as follows:\n\nTotal revenue growth = Total revenue in FY2024 - Total revenue in FY2020\n= $245,122 million - $143,015 million\n= $102,107 million\n\nFinal Answer: $102,107 million"
+    },
+    {
+      "id": "hard_2",
+      "question": "What was Microsoft's non-GAAP adjusted net income for fiscal year 2023? (Note: this differs from the GAAP net income figure for the same year.)",
+      "difficulty": "gaap_nongaap_discrimination",
+      "gold_answer": "$73,307 million",
+      "model_extracted_answer": "$73,307 million",
+      "is_correct": true,
+      "full_raw_output": "To find Microsoft's non-GAAP adjusted net income for fiscal year 2023, I will use the following triples:\n\n- (msft, has_net_income_fy2023_gaap, $72,361 million)\n- (msft, has_net_income_fy2023_nongaap_adjusted, $73,307 million)\n\nThe difference between the non-GAAP adjusted net income and the GAAP net income is the non-GAAP adjustment. \n\nNon-GAAP adjusted net income for fiscal year 2023 = GAAP net income for fiscal year 2023 + Non-GAAP adjustment\n= $72,361 million + ($73,307 million - $72,361 million)\n= $73,307 million\n\nFinal Answer: $73,307 million"
+    },
+    {
+      "id": "hard_3",
+      "question": "What was the difference between GAAP operating income and non-GAAP adjusted operating income for fiscal year 2023?",
+      "difficulty": "gaap_nongaap_arithmetic",
+      "gold_answer": "$1,171 million ($89,694M - $88,523M)",
+      "model_extracted_answer": "$1,171 million",
+      "is_correct": true,
+      "full_raw_output": "To find the difference between GAAP operating income and non-GAAP adjusted operating income for fiscal year 2023, I will use the following triples:\n\n- (msft, has_operating_income_fy2023_gaap, $88,523 million)\n- (msft, has_operating_income_fy2023_nongaap_adjusted, $89,694 million)\n\nThe calculation is as follows:\n\nGAAP operating income for FY2023: $88,523 million\nNon-GAAP adjusted operating income for FY2023: $89,694 million\n\nDifference: $89,694 million - $88,523 million = $1,171 million\n\nFinal Answer: $1,171 million"
+    },
+    {
+      "id": "hard_4",
+      "question": "Which fiscal year had higher operating income: FY2014 or FY2022, and by how much?",
+      "difficulty": "cross_document_multihop",
+      "gold_answer": "FY2022, higher by $55,624 million ($83,383M - $27,759M)",
+      "model_extracted_answer": "FY2022 had $55,624 million higher operating income than FY2014.",
+      "is_correct": false,
+      "full_raw_output": "To answer this question, I will use the following triples:\n\n- (msft, has_operating_income_fy2014, $27,759 million)\n- (msft, has_operating_income_fy2022, $83,383 million)\n\nFirst, I will identify the operating income for FY2014 and FY2022. \n\nOperating income for FY2014: $27,759 million\nOperating income for FY2022: $83,383 million\n\nSince $83,383 million is greater than $27,759 million, FY2022 had higher operating income.\n\nTo find the difference, I will subtract the operating income of FY2014 from the operating income of FY2022.\n\nDifference: $83,383 million - $27,759 million = $55,624 million\n\nFinal Answer: FY2022 had $55,624 million higher operating income than FY2014."
+    },
+    {
+      "id": "hard_5",
+      "question": "By approximately what percentage did Microsoft's total revenue grow from fiscal year 2015 to fiscal year 2024?",
+      "difficulty": "cross_document_multihop_percentage",
+      "gold_answer": "approximately 161.9% (from $93,580M to $245,122M)",
+      "model_extracted_answer": "162%",
+      "is_correct": true,
+      "full_raw_output": "To find the percentage growth in Microsoft's total revenue from fiscal year 2015 to fiscal year 2024, I will use the following triples:\n\n- (msft, has_total_revenue_fy2015, $93,580 million)\n- (msft, has_total_revenue_fy2024, $245,122 million)\n\nFirst, I will calculate the difference in total revenue between the two years:\n$245,122 million - $93,580 million = $151,542 million\n\nNext, I will calculate the percentage growth by dividing the difference by the original value and multiplying by 100:\n($151,542 million / $93,580 million) * 100 \u2248 162%\n\nTherefore, Microsoft's total revenue grew by approximately 162% from fiscal year 2015 to fiscal year 2024.\n\nFinal Answer: 162%"
+    },
+    {
+      "id": "hard_6",
+      "question": "What was Microsoft's stockholders' equity as of the end of fiscal year 2011?",
+      "difficulty": "needle_in_haystack",
+      "gold_answer": "$57,083 million",
+      "model_extracted_answer": "$57,083 million",
+      "is_correct": true,
+      "full_raw_output": "To find Microsoft's stockholders' equity as of the end of fiscal year 2011, I will use the following triple:\n\n(msft, has_stockholders_equity_fy2011, $57,083 million)\n\nSince this triple directly provides the stockholders' equity for fiscal year 2011, I will use it as is.\n\nFinal Answer: $57,083 million"
+    },
+    {
+      "id": "hard_7",
+      "question": "What was the combined operating income of Microsoft's Intelligent Cloud and More Personal Computing segments (excluding Productivity and Business Processes) in fiscal year 2024?",
+      "difficulty": "selective_aggregation",
+      "gold_answer": "$68,893 million ($49,584M + $19,309M)",
+      "model_extracted_answer": "$68,893 million",
+      "is_correct": true,
+      "full_raw_output": "To find the combined operating income of Microsoft's Intelligent Cloud and More Personal Computing segments in fiscal year 2024, I will use the following triples:\n\n- (Intelligent Cloud, has_operating_income_fy2024, $49,584 million)\n- (More Personal Computing, has_operating_income_fy2024, $19,309 million)\n\nI will add the operating income of Intelligent Cloud and More Personal Computing segments to find the combined operating income.\n\nCombined operating income = $49,584 million + $19,309 million\nCombined operating income = $68,893 million\n\nFinal Answer: $68,893 million"
+    },
+    {
+      "id": "hard_8",
+      "question": "What percentage of Microsoft's income before income taxes was paid as the provision for income taxes in fiscal year 2022?",
+      "difficulty": "computed_ratio",
+      "gold_answer": "approximately 13.1% ($10,978M / $83,716M)",
+      "model_extracted_answer": "13.1%",
+      "is_correct": true,
+      "full_raw_output": "To find the percentage of Microsoft's income before income taxes that was paid as the provision for income taxes in fiscal year 2022, I will use the following triples:\n\n- (msft, has_income_before_taxes_fy2022, $83,716 million)\n- (msft, has_provision_for_income_taxes_fy2022, $10,978 million)\n\nFirst, I will calculate the percentage by dividing the provision for income taxes by the income before income taxes and then multiplying by 100.\n\nPercentage = (has_provision_for_income_taxes_fy2022 / has_income_before_taxes_fy2022) * 100\n= ($10,978 million / $83,716 million) * 100\n= 0.131 * 100\n= 13.1%\n\nFinal Answer: 13.1%"
+    },
+    {
+      "id": "hard_9",
+      "question": "Which of Microsoft's three segments had revenue growth below 15% in fiscal year 2024? Name all that apply.",
+      "difficulty": "exhaustive_selection",
+      "gold_answer": "Productivity and Business Processes (12%) and More Personal Computing (13%)",
+      "model_extracted_answer": "Productivity and Business Processes, More Personal Computing",
+      "is_correct": null,
+      "full_raw_output": "To answer this question, I will use the following triples:\n\n- (Productivity and Business Processes, has_revenue_growth_pct_fy2024, 12%)\n- (More Personal Computing, has_revenue_growth_pct_fy2024, 13%)\n- (Intelligent Cloud, has_revenue_growth_pct_fy2024, 20%)\n\nI will calculate the revenue growth percentage for each segment in fiscal year 2024.\n\n- Productivity and Business Processes: 12% (given)\n- More Personal Computing: 13% (given)\n- Intelligent Cloud: 20% (given)\n\nSince 12% and 13% are both below 15%, the segments with revenue growth below 15% in fiscal year 2024 are:\n\nProductivity and Business Processes\nMore Personal Computing\n\nFinal Answer: Productivity and Business Processes, More Personal Computing"
+    },
+    {
+      "id": "hard_10",
+      "question": "What was the increase in Microsoft's diluted earnings per share from fiscal year 2012 to fiscal year 2014?",
+      "difficulty": "needle_in_haystack_arithmetic",
+      "gold_answer": "$0.63 ($2.63 - $2.00)",
+      "model_extracted_answer": "$0.63",
+      "is_correct": true,
+      "full_raw_output": "To find the increase in Microsoft's diluted earnings per share from fiscal year 2012 to fiscal year 2014, I will use the following triples:\n\n- (msft, has_diluted_eps_fy2012, $2.00)\n- (msft, has_diluted_eps_fy2014, $2.63)\n\nFirst, I will calculate the increase in diluted earnings per share from fiscal year 2012 to fiscal year 2014:\n\nIncrease = Diluted EPS in FY2014 - Diluted EPS in FY2012\n= $2.63 - $2.00\n= $0.63\n\nSo, the increase in Microsoft's diluted earnings per share from fiscal year 2012 to fiscal year 2014 is $0.63.\n\nFinal Answer: $0.63"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "clean_accuracy": 0.875,
+  "raw_accuracy": 0.875,
+  "by_difficulty": {
+    "single_fact": {
+      "clean": 4,
+      "raw": 4,
+      "total": 5
+    },
+    "multi_fact_comparison": {
+      "clean": 1,
+      "raw": 1,
+      "total": 1
+    },
+    "multi_fact_arithmetic": {
+      "clean": 2,
+      "raw": 2,
+      "total": 2
+    }
+  },
+  "results": [
+    {
+      "id": "oracle_1",
+      "question": "What was Microsoft's Intelligent Cloud segment revenue for fiscal year 2024?",
+      "difficulty": "single_fact",
+      "gold_answer": "$105,362 million",
+      "clean_answer": "$105,362",
+      "clean_correct": true,
+      "raw_answer": "$105,362 million",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_2",
+      "question": "What was Microsoft's total revenue for fiscal year 2024, and what was the percentage increase from fiscal year 2023?",
+      "difficulty": "single_fact",
+      "gold_answer": "$245,122 million, a 16% increase",
+      "clean_answer": "$245,122 million, 16%",
+      "clean_correct": true,
+      "raw_answer": "The final answer is $245,122 million and 15.67%.",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_3",
+      "question": "Which of Microsoft's three segments had the highest operating income in fiscal year 2024, and what was that operating income?",
+      "difficulty": "multi_fact_comparison",
+      "gold_answer": "Intelligent Cloud, $49,584 million",
+      "clean_answer": "$49,584",
+      "clean_correct": true,
+      "raw_answer": "$49,584 million",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_4",
+      "question": "What was Microsoft's net income for fiscal year 2022 (year ended June 30, 2022)?",
+      "difficulty": "single_fact",
+      "gold_answer": "$72,738 million",
+      "clean_answer": "$72,738 million.",
+      "clean_correct": true,
+      "raw_answer": "$72,738 million",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_5",
+      "question": "By how much did Microsoft's net income grow, in dollar terms, from fiscal year 2020 to fiscal year 2022?",
+      "difficulty": "multi_fact_arithmetic",
+      "gold_answer": "$28,457 million ($72,738M minus $44,281M)",
+      "clean_answer": "$28,457",
+      "clean_correct": true,
+      "raw_answer": "$28,457 million",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_6",
+      "question": "What was Microsoft's diluted earnings per share for fiscal year 2015?",
+      "difficulty": "single_fact",
+      "gold_answer": "$1.48",
+      "clean_answer": "Not Available",
+      "clean_correct": false,
+      "raw_answer": "$1.48",
+      "raw_correct": true
+    },
+    {
+      "id": "oracle_7",
+      "question": "What were Microsoft's total assets as of June 30, 2014?",
+      "difficulty": "single_fact",
+      "gold_answer": "$172,384 million",
+      "clean_answer": "$172,384",
+      "clean_correct": true,
+      "raw_answer": "$135,409 million",
+      "raw_correct": false
+    },
+    {
+      "id": "oracle_8",
+      "question": "What was the difference in revenue growth rate (percentage) between the Intelligent Cloud and Productivity and Business Processes segments in fiscal year 2024?",
+      "difficulty": "multi_fact_arithmetic",
+      "gold_answer": "8 percentage points (Intelligent Cloud grew 20% vs Productivity and Business Processes 12%)",
+      "clean_answer": "8%",
+      "clean_correct": true,
+      "raw_answer": "8%",
+      "raw_correct": true
+    }
+  ]
+}

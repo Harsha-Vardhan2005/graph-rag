@@ -1,0 +1,125 @@
+{
+  "benchmark_date": "2026-09-15",
+  "sample_size": 4,
+  "overall_summary": {
+    "tier0_direct_llm": {
+      "avg_faithfulness": 0.0,
+      "avg_hallucination_rate": 100.0
+    },
+    "tier1_vector_rag": {
+      "avg_faithfulness": 95.0,
+      "avg_hallucination_rate": 5.0
+    },
+    "tier3_agentic_provenance": {
+      "avg_faithfulness": 90.2,
+      "avg_hallucination_rate": 9.8
+    },
+    "provenance_improvement_vs_vector_rag": "+-4.8%"
+  },
+  "per_query_results": [
+    {
+      "id": "P1",
+      "question": "What are Apple's major risk factors regarding foreign exchange volatility and global supply chain disruptions?",
+      "tier0_direct_llm": {
+        "faithfulness_score": 0.0,
+        "hallucination_rate": 100.0,
+        "total_claims": 5,
+        "grounded_claims": 0,
+        "latency_s": 2.0
+      },
+      "tier1_vector_rag": {
+        "faithfulness_score": 100.0,
+        "hallucination_rate": 0.0,
+        "total_claims": 4,
+        "grounded_claims": 4,
+        "latency_s": 5.97
+      },
+      "tier3_agentic_provenance": {
+        "faithfulness_score": 100.0,
+        "hallucination_rate": 0.0,
+        "total_claims": 2,
+        "grounded_claims": 2,
+        "evidence_sources_count": 3,
+        "latency_s": 2.08
+      }
+    },
+    {
+      "id": "P2",
+      "question": "What are the market conditions and technological risk factors impacting Apple's product sales?",
+      "tier0_direct_llm": {
+        "faithfulness_score": 0.0,
+        "hallucination_rate": 100.0,
+        "total_claims": 6,
+        "grounded_claims": 0,
+        "latency_s": 1.6
+      },
+      "tier1_vector_rag": {
+        "faithfulness_score": 100.0,
+        "hallucination_rate": 0.0,
+        "total_claims": 4,
+        "grounded_claims": 4,
+        "latency_s": 1.88
+      },
+      "tier3_agentic_provenance": {
+        "faithfulness_score": 100.0,
+        "hallucination_rate": 0.0,
+        "total_claims": 4,
+        "grounded_claims": 4,
+        "evidence_sources_count": 18,
+        "latency_s": 2.68
+      }
+    },
+    {
+      "id": "P3",
+      "question": "How do regulatory and government compliance requirements affect Apple's operations and disclosures?",
+      "tier0_direct_llm": {
+        "faithfulness_score": 0.0,
+        "hallucination_rate": 100.0,
+        "total_claims": 6,
+        "grounded_claims": 0,
+        "latency_s": 1.6
+      },
+      "tier1_vector_rag": {
+        "faithfulness_score": 100.0,
+        "hallucination_rate": 0.0,
+        "total_claims": 3,
+        "grounded_claims": 3,
+        "latency_s": 1.91
+      },
+      "tier3_agentic_provenance": {
+        "faithfulness_score": 85.71,
+        "hallucination_rate": 14.29,
+        "total_claims": 14,
+        "grounded_claims": 12,
+        "evidence_sources_count": 30,
+        "latency_s": 16.03
+      }
+    },
+    {
+      "id": "P4",
+      "question": "What key financial metrics does Apple disclose regarding net sales and operating income?",
+      "tier0_direct_llm": {
+        "faithfulness_score": 0.0,
+        "hallucination_rate": 100.0,
+        "total_claims": 7,
+        "grounded_claims": 0,
+        "latency_s": 9.88
+      },
+      "tier1_vector_rag": {
+        "faithfulness_score": 80.0,
+        "hallucination_rate": 20.0,
+        "total_claims": 5,
+        "grounded_claims": 4,
+        "latency_s": 9.17
+      },
+      "tier3_agentic_provenance": {
+        "faithfulness_score": 75.0,
+        "hallucination_rate": 25.0,
+        "total_claims": 4,
+        "grounded_claims": 3,
+        "evidence_sources_count": 3,
+        "latency_s": 21.53
+      }
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "overall_accuracy": 0.6,
+  "by_steps": {
+    "2": {
+      "correct": 4,
+      "total": 5
+    },
+    "3": {
+      "correct": 5,
+      "total": 5
+    },
+    "4": {
+      "correct": 1,
+      "total": 5
+    },
+    "5": {
+      "correct": 2,
+      "total": 5
+    }
+  },
+  "results": [
+    {
+      "id": "C/2017/page_328.pdf-1",
+      "question": "what was the percentage cumulative total return for the five year period ended 31-dec-2017 of citi common stock?",
+      "num_steps": 2,
+      "gold_program": "subtract(193.5, const_100), divide(#0, const_100)",
+      "gold_answer": 0.935,
+      "model_answer": "93.5%",
+      "is_correct": true,
+      "full_raw_output": "To calculate the percentage cumulative total return, we need to find the difference between the final value and the initial value, divide by the initial value, and then multiply by 100.\n\nInitial value = 100.0\nFinal value = 193.5\n\nCalculation: ((193.5 - 100.0) / 100.0) * 100 = 93.5%\n\nFinal Answer: 93.5%"
+    },
+    {
+      "id": "DVN/2007/page_58.pdf-2",
+      "question": "what percentage of the total oil and gas mmboe comes from canada?",
+      "num_steps": 2,
+      "gold_program": "divide(60, 243), multiply(#0, const_100)",
+      "gold_answer": 24.69136,
+      "model_answer": "24.7%",
+      "is_correct": true,
+      "full_raw_output": "To find the percentage of the total oil and gas mmboe that comes from Canada, we need to divide the total mmboe from Canada by the total mmboe and multiply by 100.\n\nTotal mmboe from Canada = 60\nTotal mmboe = 243\n\nPercentage = (60 / 243) * 100 = 24.7%\n\nFinal Answer: 24.7%"
+    },
+    {
+      "id": "MRO/2007/page_149.pdf-2",
+      "question": "if current development costs increased in 2008 as much as in 2007 , what would the 2008 total be , in millions?",
+      "num_steps": 2,
+      "gold_program": "subtract(1654, 1251), add(#0, 1654)",
+      "gold_answer": 2057.0,
+      "model_answer": "$2057",
+      "is_correct": true,
+      "full_raw_output": "To calculate the 2008 total development costs, we first need to find the increase in development costs from 2006 to 2007. \n\nDevelopment costs in 2006: $1251 million\nDevelopment costs in 2007: $1654 million\nIncrease in development costs: $1654 - $1251 = $403 million\n\nIf the development costs increased by the same amount in 2008, the new total would be:\n$1654 (2007 development costs) + $403 (increase) = $2057 million\n\nFinal Answer: $2057"
+    },
+    {
+      "id": "ABMD/2006/page_75.pdf-1",
+      "question": "what is the decline from current future minimum lease payments and the following years expected obligation?\\\\n",
+      "num_steps": 2,
+      "gold_program": "subtract(1703, 1371), divide(#0, 1703)",
+      "gold_answer": 0.19495,
+      "model_answer": "19.5%",
+      "is_correct": true,
+      "full_raw_output": "To find the decline, we need to calculate the difference between the current year's lease payment and the next year's lease payment, and then express it as a percentage of the current year's lease payment.\n\nCurrent year's lease payment (2007): $1703\nNext year's lease payment (2008): $1371\n\nDecline: $1703 - $1371 = $332\nDecline percentage: ($332 / $1703) * 100% \u2248 19.5%\n\nFinal Answer: 19.5%"
+    },
+    {
+      "id": "AMAT/2013/page_18.pdf-2",
+      "question": "what is the applied 2019s net sales in 2018 , ( in billions ) ?",
+      "num_steps": 2,
+      "gold_program": "divide(18, const_100), divide(1.3, #0)",
+      "gold_answer": 7.22222,
+      "model_answer": "Cannot be determined",
+      "is_correct": false,
+      "full_raw_output": "To find the net sales in 2013, we can use the information that $1.3 billion is 18% of net sales. \n\nLet's denote net sales as x. Then, 18% of x is $1.3 billion.\n0.18x = $1.3 billion\nx = $1.3 billion / 0.18\nx = $7.22 billion\n\nHowever, the question asks for the net sales in 2018, but the provided data only goes up to 2013. Since there's no information about the net sales in 2018, we cannot calculate it directly from the given data.\n\nFinal Answer: Cannot be determined"
+    },
+    {
+      "id": "DVN/2014/page_85.pdf-1",
+      "question": "what is the average amortization amount , in millions , from 2015-2019?",
+      "num_steps": 3,
+      "gold_program": "multiply(45, const_4), add(#0, 44), divide(#1, const_5)",
+      "gold_answer": 44.8,
+      "model_answer": "44.8",
+      "is_correct": true,
+      "full_raw_output": "To find the average amortization amount, we need to add up the amortization amounts for each year and divide by the number of years.\n\nAmortization amounts: $45 + $45 + $45 + $45 + $44 = $224\nNumber of years: 5\n\nAverage amortization amount: $224 / 5 = $44.8\n\nFinal Answer: 44.8"
+    },
+    {
+      "id": "ETR/2003/page_84.pdf-2",
+      "question": "what amount of long-term debt due in the next 36 months as of december 31 , 2003 , in millions?",
+      "num_steps": 3,
+      "gold_program": "add(503215, 462420), add(#0, 75896), divide(#1, const_1000)",
+      "gold_answer": 1041.531,
+      "model_answer": "1042",
+      "is_correct": true,
+      "full_raw_output": "To find the amount of long-term debt due in the next 36 months, we need to look at the annual long-term debt maturities for 2004, 2005, and 2006.\n\nThe table shows:\n- 2004: $503,215\n- 2005: $462,420\n- 2006: $75,896\n\nAdding these amounts together gives us the total long-term debt due in the next 36 months:\n$503,215 + $462,420 + $75,896 = $1,041,531\n\nSince the question asks for the answer in millions, we divide by 1,000:\n$1,041,531 / 1,000 = $1,041.531 million\n\nRounding to the nearest whole number as the table values are given in thousands, which implies a rounding to the nearest thousand:\n$1,041.531 million \u2248 $1,042 million\n\nFinal Answer: 1042"
+    },
+    {
+      "id": "AON/2014/page_47.pdf-1",
+      "question": "what is the variation between the average and the highest operating margin?",
+      "num_steps": 3,
+      "gold_program": "table_average(operating margin, none), table_max(operating margin, none), subtract(#1, #0)",
+      "gold_answer": 0.02533,
+      "model_answer": "2.53%",
+      "is_correct": true,
+      "full_raw_output": "To find the variation between the average and the highest operating margin, we first need to calculate the average operating margin. \n\nAverage operating margin = (11.4% + 7.8% + 7.4%) / 3 = 26.6% / 3 = 8.87%\n\nThe highest operating margin is 11.4%. \n\nVariation = Highest operating margin - Average operating margin = 11.4% - 8.87% = 2.53%\n\nFinal Answer: 2.53%"
+    },
+    {
+      "id": "LMT/2017/page_80.pdf-1",
+      "question": "what was the average weighted average common shares outstanding for diluted computations from 2015 to 2017",
+      "num_steps": 3,
+      "gold_program": "add(290.6, 303.1), add(#0, 314.7), divide(#1, const_3)",
+      "gold_answer": 302.8,
+      "model_answer": "302.8",
+      "is_correct": true,
+      "full_raw_output": "To find the average weighted average common shares outstanding for diluted computations from 2015 to 2017, we need to add the values for each year and divide by the number of years.\n\nWeighted average common shares outstanding for diluted computations:\n2015: 314.7\n2016: 303.1\n2017: 290.6\n\nAverage = (314.7 + 303.1 + 290.6) / 3\nAverage = 908.4 / 3\nAverage = 302.8\n\nFinal Answer: 302.8"
+    },
+    {
+      "id": "IPG/2008/page_62.pdf-1",
+      "question": "what is the average liability for all three programs , as of december 31 , 2008 , in millions?",
+      "num_steps": 3,
+      "gold_program": "add(1.2, 5.7), add(#0, 5.9), divide(#1, const_3)",
+      "gold_answer": 4.26667,
+      "model_answer": "4.27",
+      "is_correct": true,
+      "full_raw_output": "To find the average liability, we need to add the liabilities of the three programs and divide by 3.\n\nLiability at December 31, 2008: \n2007 program = $1.2\n2003 program = $5.7\n2001 program = $5.9\n\nAverage liability = (1.2 + 5.7 + 5.9) / 3\n= 12.8 / 3\n= 4.27\n\nFinal Answer: 4.27"
+    },
+    {
+      "id": "C/2010/page_223.pdf-3",
+      "question": "in 2010 what was the percentage change of the carrying amount of loan receivable net of the allowance",
+      "num_steps": 4,
+      "gold_program": "subtract(920, 95), subtract(469, 77), subtract(#1, #0), divide(#2, #0)",
+      "gold_answer": -0.52485,
+      "model_answer": "-52.4%",
+      "is_correct": true,
+      "full_raw_output": "To calculate the percentage change of the carrying amount of loan receivable net of the allowance, we need to first find the net carrying amount at the beginning and end of 2010.\n\nBeginning net carrying amount = Carrying amount of loan receivable - Allowance\n= $920 - $95\n= $825\n\nEnding net carrying amount = Carrying amount of loan receivable - Allowance\n= $469 - $77\n= $392\n\nPercentage change = ((Ending net carrying amount - Beginning net carrying amount) / Beginning net carrying amount) * 100\n= (($392 - $825) / $825) * 100\n= (-$433 / $825) * 100\n= -0.524 * 100\n= -52.4%\n\nFinal Answer: -52.4%"
+    },
+    {
+      "id": "CB/2010/page_200.pdf-3",
+      "question": "what was the average potential anti-dilutive share conversions from 2008 to 2010",
+      "num_steps": 4,
+      "gold_program": "add(256868, 1230881), add(638401, #0), add(#1, const_3), divide(#2, const_2)",
+      "gold_answer": 1063076.5,
+      "model_answer": "707717",
+      "is_correct": false,
+      "full_raw_output": "To find the average potential anti-dilutive share conversions, we need to add the conversions for each year and divide by the number of years.\n\n(256868 + 1230881 + 638401) / 3 = \n(256868 + 1230881 + 638401) = 256868 + 1868282 = 2123150\n2123150 / 3 = 707716.67\n\nFinal Answer: 707717"
+    },
+    {
+      "id": "LMT/2013/page_74.pdf-1",
+      "question": "what was the average number of weighted average common shares outstanding for diluted computations from 2011 to 2013",
+      "num_steps": 4,
+      "gold_program": "add(326.5, 328.4), add(#0, 339.9), add(#1, const_3), divide(#2, const_2)",
+      "gold_answer": 498.9,
+      "model_answer": "333",
+      "is_correct": false,
+      "full_raw_output": "To find the average number of weighted average common shares outstanding for diluted computations from 2011 to 2013, we need to add the values for each year and divide by the number of years.\n\n(326.5 + 328.4 + 339.9) / 3 = 998.8 / 3 = 332.93\n\nFinal Answer: 333"
+    },
+    {
+      "id": "MSI/2006/page_61.pdf-4",
+      "question": "what was the average rental expense , net of sublease income from 2004 to 2006 in millions",
+      "num_steps": 4,
+      "gold_program": "add(241, 250), add(#0, 205), add(#1, const_3), divide(#2, const_2)",
+      "gold_answer": 349.5,
+      "model_answer": "232",
+      "is_correct": false,
+      "full_raw_output": "To find the average rental expense, we need to add the rental expenses from 2004, 2005, and 2006, and then divide by the number of years.\n\nRental expense in 2004: $205 million\nRental expense in 2005: $250 million\nRental expense in 2006: $241 million\n\nTotal rental expense: $205 + $250 + $241 = $696 million\nNumber of years: 3\n\nAverage rental expense: $696 / 3 = $232 million\n\nFinal Answer: 232"
+    },
+    {
+      "id": "APD/2018/page_59.pdf-1",
+      "question": "considering the fair market value of plan assets in 2018 , what is its estimated return for 10 years?",
+      "num_steps": 4,
+      "gold_program": "divide(6.9%, const_100), add(const_1, #0), exp(#1, 10), multiply(4273.1, #2)",
+      "gold_answer": 4302.67611,
+      "model_answer": "6.9%",
+      "is_correct": false,
+      "full_raw_output": "To estimate the return for 10 years, we need to make an assumption about the expected rate of return on plan assets. According to the table, the weighted average expected rate of return on plan assets in 2018 is 6.9%. \n\nWe can use this rate to estimate the return over 10 years. However, the provided information does not give us the exact amount of return, but rather the rate. Assuming the rate remains constant, the estimated return can be calculated as follows:\n\nEstimated return = Fair market value of plan assets * (1 + expected rate of return)^10 - Fair market value of plan assets\n= $4273.1 * (1 + 0.069)^10 - $4273.1\n\u2248 $4273.1 * 1.869 - $4273.1\n\u2248 $7985.6 - $4273.1\n\u2248 $3712.5\n\nHowever, the question seems to be asking for the rate of return, not the total return. Since we already have the expected rate of return, we can use that directly.\n\nFinal Answer: 6.9%"
+    },
+    {
+      "id": "PM/2018/page_24.pdf-2",
+      "question": "what was the difference in percentage return for pmi common stock compared to the s&p 500 index for the five years ended 2018?",
+      "num_steps": 5,
+      "gold_program": "subtract(96.50, const_100), divide(#0, const_100), subtract(150.30, const_100), divide(#2, const_100), subtract(#3, #1)",
+      "gold_answer": 0.538,
+      "model_answer": "53.8%",
+      "is_correct": true,
+      "full_raw_output": "To calculate the difference in percentage return, first, find the total return for each:\n\nPMI return: ($96.50 - $100.00) / $100.00 = -3.5%\nS&P 500 index return: ($150.30 - $100.00) / $100.00 = 50.3%\n\nThen, calculate the difference in percentage return:\n50.3% - (-3.5%) = 53.8%\n\nFinal Answer: 53.8%"
+    },
+    {
+      "id": "FRT/2005/page_117.pdf-1",
+      "question": "what is the growth of the additions in comparison with the growth of the deductions during 2003 and 2004?",
+      "num_steps": 5,
+      "gold_program": "divide(82551000, 68125000), subtract(#0, const_1), divide(1390000, 4645000), subtract(#2, const_1), subtract(#1, #3)",
+      "gold_answer": 0.91251,
+      "model_answer": "1154%",
+      "is_correct": false,
+      "full_raw_output": "To calculate the growth of additions and deductions, we need to find the difference between the values for 2004 and 2003.\n\nAdditions in 2003: $82,551,000\nAdditions in 2004: $83,656,000\nGrowth of additions: $83,656,000 - $82,551,000 = $1,105,000\n\nDeductions in 2003: $1,390,000\nDeductions in 2004: $15,244,000\nGrowth of deductions: $15,244,000 - $1,390,000 = $13,854,000\n\nNow, to compare the growth:\nGrowth of additions: $1,105,000\nGrowth of deductions: $13,854,000\n\nThe growth of deductions ($13,854,000) is significantly higher than the growth of additions ($1,105,000). \n\nTo find the percentage growth comparison: \n((Growth of deductions - Growth of additions) / Growth of additions) * 100\n= (($13,854,000 - $1,105,000) / $1,105,000) * 100\n= ($12,749,000 / $1,105,000) * 100\n= 1154%\n\nHowever, the question seems to be asking for a comparison rather than a specific percentage growth rate of one over the other. Since the growth of deductions is $13,854,000 and the growth of additions is $1,105,000, we see the deductions grew much more. \n\nBut if we consider the question as asking for the percentage increase of the growth of deductions compared to the growth of additions:\n Growth of deductions is 1154% more than the growth of additions, but to express it as the question might imply (comparing the two growths directly as a percentage):\n( Growth of deductions / Growth of additions ) * 100 = ($13,854,000 / $1,105,000) * 100 = 1253%\n\nHowever, the most straightforward interpretation of the question given the data provided would be to look at the ratio of growth or the difference in growth, but since the question asks for \"the growth of the additions in comparison with the growth of the deductions,\" and given the provided calculations, the most direct answer to provide based on typical financial analysis would be the percentage increase of deductions over additions, which is not directly asked but implied in the comparison.\n\nFinal Answer: 1154%"
+    },
+    {
+      "id": "ALXN/2007/page_104.pdf-1",
+      "question": "what is the average future minimum annual rental payment for the next five years?",
+      "num_steps": 5,
+      "gold_program": "add(3144, 3160), add(#0, 3200), add(#1, 2768), add(#2, 9934), divide(#3, const_5)",
+      "gold_answer": 4441.2,
+      "model_answer": "3441.4",
+      "is_correct": false,
+      "full_raw_output": "To calculate the average future minimum annual rental payment for the next five years, we need to add up the payments for 2008 to 2012 and divide by 5.\n\n$4935 + $3144 + $3160 + $3200 + $2768 = $17207\n\nAverage = $17207 / 5 = $3441.4\n\nFinal Answer: 3441.4"
+    },
+    {
+      "id": "C/2017/page_328.pdf-3",
+      "question": "what was the difference in percentage cumulative total return for the five year period ended 31-dec-2017 of citi common stock and s&p financials?",
+      "num_steps": 5,
+      "gold_program": "subtract(193.5, const_100), divide(#0, const_100), subtract(230.9, const_100), divide(#2, const_100), subtract(#1, #3)",
+      "gold_answer": -0.374,
+      "model_answer": "37.4%",
+      "is_correct": false,
+      "full_raw_output": "To find the difference in percentage cumulative total return, first, calculate the percentage cumulative total return for each.\n\nCiti: ((193.5 - 100) / 100) = 93.5%\nS&P Financials: ((230.9 - 100) / 100) = 130.9%\n\nThen, find the difference: 130.9% - 93.5% = 37.4%\n\nFinal Answer: 37.4%"
+    },
+    {
+      "id": "CDNS/2018/page_31.pdf-2",
+      "question": "what was the difference in percentage cumulative 5-year total stockholder return for cadence design systems inc . compared to the nasdaq composite for the period ending 12/29/2018?",
+      "num_steps": 5,
+      "gold_program": "subtract(311.13, const_100), divide(#0, const_100), subtract(165.84, const_100), divide(#2, const_100), subtract(#1, #3)",
+      "gold_answer": 1.4529,
+      "model_answer": "145.29%",
+      "is_correct": true,
+      "full_raw_output": "To calculate the difference in percentage cumulative 5-year total stockholder return, first, find the cumulative return for each:\n\nCadence Design Systems Inc.: $311.13 - $100.00 = $211.13, then ($211.13 / $100.00) * 100% = 211.13%\nNasdaq Composite: $165.84 - $100.00 = $65.84, then ($65.84 / $100.00) * 100% = 65.84%\n\nDifference: 211.13% - 65.84% = 145.29%\n\nFinal Answer: 145.29%"
+    }
+  ]
+}

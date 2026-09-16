@@ -1,0 +1,173 @@
+[
+  {
+    "id": "oracle_1",
+    "question": "What was Microsoft's Intelligent Cloud segment revenue for fiscal year 2024?",
+    "gold_answer": "$105,362 million",
+    "gold_answer_numeric": 105362,
+    "difficulty": "single_fact",
+    "raw_triples": [
+      "(Productivity and Business Processes, has_revenue_fy2024, $77,728 million)",
+      "(Productivity and Business Processes, has_revenue_fy2023, $69,274 million)",
+      "(Intelligent Cloud, has_revenue_fy2024, $105,362 million)",
+      "(Intelligent Cloud, has_revenue_fy2023, $87,907 million)",
+      "(More Personal Computing, has_revenue_fy2024, $62,032 million)",
+      "(More Personal Computing, has_revenue_fy2023, $54,734 million)",
+      "(msft, has_total_revenue_fy2024, $245,122 million)",
+      "(msft, has_total_revenue_fy2023, $211,915 million)",
+      "(Productivity and Business Processes, has_operating_income_fy2024, $40,540 million)",
+      "(Intelligent Cloud, has_operating_income_fy2024, $49,584 million)",
+      "(More Personal Computing, has_operating_income_fy2024, $19,309 million)",
+      "(msft, has_total_operating_income_fy2024, $109,433 million)",
+      "(Intelligent Cloud, includes_product, Azure)",
+      "(Intelligent Cloud, includes_product, SQL Server)",
+      "(msft, employs, 228000 people)"
+    ]
+  },
+  {
+    "id": "oracle_2",
+    "question": "What was Microsoft's total revenue for fiscal year 2024, and what was the percentage increase from fiscal year 2023?",
+    "gold_answer": "$245,122 million, a 16% increase",
+    "gold_answer_numeric": 245122,
+    "difficulty": "single_fact",
+    "raw_triples": [
+      "(msft, has_total_revenue_fy2024, $245,122 million)",
+      "(msft, has_total_revenue_fy2023, $211,915 million)",
+      "(msft, has_revenue_growth_pct_fy2024, 16%)",
+      "(Productivity and Business Processes, has_revenue_growth_pct_fy2024, 12%)",
+      "(Intelligent Cloud, has_revenue_growth_pct_fy2024, 20%)",
+      "(More Personal Computing, has_revenue_growth_pct_fy2024, 13%)",
+      "(msft, has_total_operating_income_fy2024, $109,433 million)",
+      "(msft, has_total_operating_income_fy2023, $88,523 million)",
+      "(msft, has_operating_income_growth_pct_fy2024, 24%)",
+      "(msft, employs, 228000 people)",
+      "(msft, operates_segment, Intelligent Cloud)",
+      "(msft, operates_segment, Productivity and Business Processes)"
+    ]
+  },
+  {
+    "id": "oracle_3",
+    "question": "Which of Microsoft's three segments had the highest operating income in fiscal year 2024, and what was that operating income?",
+    "gold_answer": "Intelligent Cloud, $49,584 million",
+    "gold_answer_numeric": 49584,
+    "difficulty": "multi_fact_comparison",
+    "raw_triples": [
+      "(Productivity and Business Processes, has_operating_income_fy2024, $40,540 million)",
+      "(Productivity and Business Processes, has_operating_income_fy2023, $34,189 million)",
+      "(Intelligent Cloud, has_operating_income_fy2024, $49,584 million)",
+      "(Intelligent Cloud, has_operating_income_fy2023, $37,884 million)",
+      "(More Personal Computing, has_operating_income_fy2024, $19,309 million)",
+      "(More Personal Computing, has_operating_income_fy2023, $16,450 million)",
+      "(msft, has_total_operating_income_fy2024, $109,433 million)",
+      "(Intelligent Cloud, has_revenue_fy2024, $105,362 million)",
+      "(Productivity and Business Processes, has_revenue_fy2024, $77,728 million)",
+      "(More Personal Computing, has_revenue_fy2024, $62,032 million)",
+      "(Intelligent Cloud, includes_product, Azure)",
+      "(msft, operates_segment, Intelligent Cloud)"
+    ]
+  },
+  {
+    "id": "oracle_4",
+    "question": "What was Microsoft's net income for fiscal year 2022 (year ended June 30, 2022)?",
+    "gold_answer": "$72,738 million",
+    "gold_answer_numeric": 72738,
+    "difficulty": "single_fact",
+    "raw_triples": [
+      "(msft, has_total_revenue_fy2022, $198,270 million)",
+      "(msft, has_total_revenue_fy2021, $168,088 million)",
+      "(msft, has_total_revenue_fy2020, $143,015 million)",
+      "(msft, has_cost_of_revenue_fy2022, $62,650 million)",
+      "(msft, has_gross_margin_fy2022, $135,620 million)",
+      "(msft, has_research_and_development_expense_fy2022, $24,512 million)",
+      "(msft, has_operating_income_fy2022, $83,383 million)",
+      "(msft, has_income_before_taxes_fy2022, $83,716 million)",
+      "(msft, has_provision_for_income_taxes_fy2022, $10,978 million)",
+      "(msft, has_net_income_fy2022, $72,738 million)",
+      "(msft, has_net_income_fy2021, $61,271 million)",
+      "(msft, has_net_income_fy2020, $44,281 million)",
+      "(msft, has_basic_eps_fy2022, $9.70)",
+      "(msft, has_diluted_eps_fy2022, $9.65)"
+    ]
+  },
+  {
+    "id": "oracle_5",
+    "question": "By how much did Microsoft's net income grow, in dollar terms, from fiscal year 2020 to fiscal year 2022?",
+    "gold_answer": "$28,457 million ($72,738M minus $44,281M)",
+    "gold_answer_numeric": 28457,
+    "difficulty": "multi_fact_arithmetic",
+    "raw_triples": [
+      "(msft, has_net_income_fy2022, $72,738 million)",
+      "(msft, has_net_income_fy2021, $61,271 million)",
+      "(msft, has_net_income_fy2020, $44,281 million)",
+      "(msft, has_total_revenue_fy2022, $198,270 million)",
+      "(msft, has_total_revenue_fy2020, $143,015 million)",
+      "(msft, has_operating_income_fy2022, $83,383 million)",
+      "(msft, has_operating_income_fy2020, $52,959 million)",
+      "(msft, has_basic_eps_fy2022, $9.70)",
+      "(msft, has_basic_eps_fy2020, $5.82)",
+      "(msft, has_diluted_eps_fy2022, $9.65)",
+      "(msft, has_diluted_eps_fy2020, $5.76)"
+    ]
+  },
+  {
+    "id": "oracle_6",
+    "question": "What was Microsoft's diluted earnings per share for fiscal year 2015?",
+    "gold_answer": "$1.48",
+    "gold_answer_numeric": 1.48,
+    "difficulty": "single_fact",
+    "raw_triples": [
+      "(msft, has_revenue_fy2015, $93,580 million)",
+      "(msft, has_revenue_fy2014, $86,833 million)",
+      "(msft, has_gross_margin_fy2015, $60,542 million)",
+      "(msft, has_operating_income_fy2015, $18,161 million)",
+      "(msft, has_operating_income_fy2014, $27,759 million)",
+      "(msft, has_net_income_fy2015, $12,193 million)",
+      "(msft, has_net_income_fy2014, $22,074 million)",
+      "(msft, has_diluted_eps_fy2015, $1.48)",
+      "(msft, has_diluted_eps_fy2014, $2.63)",
+      "(msft, has_diluted_eps_fy2013, $2.58)",
+      "(msft, has_cash_dividends_per_share_fy2015, $1.24)",
+      "(msft, has_total_assets_fy2015, $176,223 million)",
+      "(msft, has_stockholders_equity_fy2015, $80,083 million)"
+    ]
+  },
+  {
+    "id": "oracle_7",
+    "question": "What were Microsoft's total assets as of June 30, 2014?",
+    "gold_answer": "$172,384 million",
+    "gold_answer_numeric": 172384,
+    "difficulty": "single_fact",
+    "raw_triples": [
+      "(msft, has_total_assets_fy2015, $176,223 million)",
+      "(msft, has_total_assets_fy2014, $172,384 million)",
+      "(msft, has_total_assets_fy2013, $142,431 million)",
+      "(msft, has_total_assets_fy2012, $121,271 million)",
+      "(msft, has_total_assets_fy2011, $108,704 million)",
+      "(msft, has_long_term_obligations_fy2014, $36,975 million)",
+      "(msft, has_stockholders_equity_fy2014, $89,784 million)",
+      "(msft, has_stockholders_equity_fy2013, $78,944 million)",
+      "(msft, has_net_income_fy2014, $22,074 million)",
+      "(msft, has_diluted_eps_fy2014, $2.63)"
+    ]
+  },
+  {
+    "id": "oracle_8",
+    "question": "What was the difference in revenue growth rate (percentage) between the Intelligent Cloud and Productivity and Business Processes segments in fiscal year 2024?",
+    "gold_answer": "8 percentage points (Intelligent Cloud grew 20% vs Productivity and Business Processes 12%)",
+    "gold_answer_numeric": 8,
+    "difficulty": "multi_fact_arithmetic",
+    "raw_triples": [
+      "(Productivity and Business Processes, has_revenue_fy2024, $77,728 million)",
+      "(Productivity and Business Processes, has_revenue_fy2023, $69,274 million)",
+      "(Productivity and Business Processes, has_revenue_growth_pct_fy2024, 12%)",
+      "(Intelligent Cloud, has_revenue_fy2024, $105,362 million)",
+      "(Intelligent Cloud, has_revenue_fy2023, $87,907 million)",
+      "(Intelligent Cloud, has_revenue_growth_pct_fy2024, 20%)",
+      "(More Personal Computing, has_revenue_fy2024, $62,032 million)",
+      "(More Personal Computing, has_revenue_growth_pct_fy2024, 13%)",
+      "(msft, has_total_revenue_fy2024, $245,122 million)",
+      "(msft, has_total_revenue_growth_pct_fy2024, 16%)",
+      "(Intelligent Cloud, includes_product, Azure)",
+      "(Productivity and Business Processes, includes_product, Office 365)"
+    ]
+  }
+]

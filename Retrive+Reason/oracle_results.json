@@ -1,0 +1,99 @@
+{
+  "overall_accuracy": 1.0,
+  "by_difficulty": {
+    "single_fact": {
+      "correct": 5,
+      "total": 5
+    },
+    "multi_fact_comparison": {
+      "correct": 1,
+      "total": 1
+    },
+    "multi_fact_arithmetic": {
+      "correct": 2,
+      "total": 2
+    }
+  },
+  "results": [
+    {
+      "id": "oracle_1",
+      "question": "What was Microsoft's Intelligent Cloud segment revenue for fiscal year 2024?",
+      "difficulty": "single_fact",
+      "gold_answer": "$105,362 million",
+      "model_raw_output": "The Intelligent Cloud segment revenue for fiscal year 2024 is directly provided in the evidence. \nIntelligent Cloud revenue for 2024 = $105,362 million\nFinal Answer: $105,362 million",
+      "model_extracted_answer": "$105,362 million",
+      "is_correct": true,
+      "detail": "model=105362.0, gold=105362"
+    },
+    {
+      "id": "oracle_2",
+      "question": "What was Microsoft's total revenue for fiscal year 2024, and what was the percentage increase from fiscal year 2023?",
+      "difficulty": "single_fact",
+      "gold_answer": "$245,122 million, a 16% increase",
+      "model_raw_output": "Total revenue for fiscal year 2024: $245,122 million\nPercentage increase from fiscal year 2023: \n= ((245,122 - 211,915) / 211,915) * 100\n= (33,207 / 211,915) * 100\n= 0.16 * 100\n= 16%\n\nFinal Answer: $245,122 million, 16%",
+      "model_extracted_answer": "$245,122 million, 16%",
+      "is_correct": true,
+      "detail": "model=245122.0, gold=245122"
+    },
+    {
+      "id": "oracle_3",
+      "question": "Which of Microsoft's three segments had the highest operating income in fiscal year 2024, and what was that operating income?",
+      "difficulty": "multi_fact_comparison",
+      "gold_answer": "Intelligent Cloud, $49,584 million",
+      "model_raw_output": "To find the segment with the highest operating income in fiscal year 2024, compare the operating incomes of the three segments: \n- Productivity and Business Processes: $40,540 million\n- Intelligent Cloud: $49,584 million\n- More Personal Computing: $19,309 million\n\nThe Intelligent Cloud segment has the highest operating income. \n\nFinal Answer: The Intelligent Cloud segment with $49,584 million.",
+      "model_extracted_answer": "The Intelligent Cloud segment with $49,584 million.",
+      "is_correct": true,
+      "detail": "model=49584.0, gold=49584"
+    },
+    {
+      "id": "oracle_4",
+      "question": "What was Microsoft's net income for fiscal year 2022 (year ended June 30, 2022)?",
+      "difficulty": "single_fact",
+      "gold_answer": "$72,738 million",
+      "model_raw_output": "Net income for fiscal year 2022 is directly provided in the evidence. \nNet income for 2022 = $72,738 million\nFinal Answer: $72,738 million",
+      "model_extracted_answer": "$72,738 million",
+      "is_correct": true,
+      "detail": "model=72738.0, gold=72738"
+    },
+    {
+      "id": "oracle_5",
+      "question": "By how much did Microsoft's net income grow, in dollar terms, from fiscal year 2020 to fiscal year 2022?",
+      "difficulty": "multi_fact_arithmetic",
+      "gold_answer": "$28,457 million ($72,738M minus $44,281M)",
+      "model_raw_output": "To find the growth in net income from fiscal year 2020 to fiscal year 2022, we need to subtract the net income of 2020 from the net income of 2022.\nNet income in 2022: $72,738\nNet income in 2020: $44,281\nGrowth = Net income in 2022 - Net income in 2020\nGrowth = $72,738 - $44,281\nGrowth = $28,457\n\nFinal Answer: $28,457",
+      "model_extracted_answer": "$28,457",
+      "is_correct": true,
+      "detail": "model=28457.0, gold=28457"
+    },
+    {
+      "id": "oracle_6",
+      "question": "What was Microsoft's diluted earnings per share for fiscal year 2015?",
+      "difficulty": "single_fact",
+      "gold_answer": "$1.48",
+      "model_raw_output": "$1.48 \n\nFinal Answer: $1.48",
+      "model_extracted_answer": "$1.48",
+      "is_correct": true,
+      "detail": "model=1.48, gold=1.48"
+    },
+    {
+      "id": "oracle_7",
+      "question": "What were Microsoft's total assets as of June 30, 2014?",
+      "difficulty": "single_fact",
+      "gold_answer": "$172,384 million",
+      "model_raw_output": "Total assets as of June 30, 2014, are given in the table: $172,384.\n\nFinal Answer: $172,384",
+      "model_extracted_answer": "$172,384",
+      "is_correct": true,
+      "detail": "model=172384.0, gold=172384"
+    },
+    {
+      "id": "oracle_8",
+      "question": "What was the difference in revenue growth rate (percentage) between the Intelligent Cloud and Productivity and Business Processes segments in fiscal year 2024?",
+      "difficulty": "multi_fact_arithmetic",
+      "gold_answer": "8 percentage points (Intelligent Cloud grew 20% vs Productivity and Business Processes 12%)",
+      "model_raw_output": "To find the difference in revenue growth rate, subtract the growth rate of Productivity and Business Processes from the growth rate of Intelligent Cloud: \n20% (Intelligent Cloud) - 12% (Productivity and Business Processes) = 8%\n\nFinal Answer: 8%",
+      "model_extracted_answer": "8%",
+      "is_correct": true,
+      "detail": "model=8.0, gold=8"
+    }
+  ]
+}

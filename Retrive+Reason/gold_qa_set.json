@@ -1,0 +1,82 @@
+[
+  {
+    "id": "oracle_1",
+    "question": "What was Microsoft's Intelligent Cloud segment revenue for fiscal year 2024?",
+    "gold_answer": "$105,362 million",
+    "gold_answer_numeric": 105362,
+    "answer_type": "numeric",
+    "difficulty": "single_fact",
+    "evidence": "| (In millions, except percentages) | 2024 | 2023 | Percentage Change | |--------------------------------------|-----------|-----------|---------------------| | Revenue | | | | | Productivity and Business Processes | $ 77,728 | $ 69,274 | 12%| | Intelligent Cloud | 105,362 | 87,907 | 20% | | More Personal Computing | 62,032 | 54,734 | 13% | | Total | $ 245,122 | $ 211,915 | 16% | | Operating Income | | | | | Productivity and Business Processes | $ 40,540 | $ 34,189 | 19% | | Intelligent Cloud | 49,584 | 37,884 | 31% | | More Personal Computing | 19,309 | 16,450 | 17% | | Total | $ 109,433 | $ 88,523| 24% |",
+    "source": "MSFT_10k_2024.pdf"
+  },
+  {
+    "id": "oracle_2",
+    "question": "What was Microsoft's total revenue for fiscal year 2024, and what was the percentage increase from fiscal year 2023?",
+    "gold_answer": "$245,122 million, a 16% increase",
+    "gold_answer_numeric": 245122,
+    "answer_type": "numeric_plus_pct",
+    "difficulty": "single_fact",
+    "evidence": "| (In millions, except percentages) | 2024 | 2023 | Percentage Change | |--------------------------------------|-----------|-----------|---------------------| | Revenue | | | | | Productivity and Business Processes | $ 77,728 | $ 69,274 | 12%| | Intelligent Cloud | 105,362 | 87,907 | 20% | | More Personal Computing | 62,032 | 54,734 | 13% | | Total | $ 245,122 | $ 211,915 | 16% | | Operating Income | | | | | Productivity and Business Processes | $ 40,540 | $ 34,189 | 19% | | Intelligent Cloud | 49,584 | 37,884 | 31% | | More Personal Computing | 19,309 | 16,450 | 17% | | Total | $ 109,433 | $ 88,523| 24% |",
+    "source": "MSFT_10k_2024.pdf"
+  },
+  {
+    "id": "oracle_3",
+    "question": "Which of Microsoft's three segments had the highest operating income in fiscal year 2024, and what was that operating income?",
+    "gold_answer": "Intelligent Cloud, $49,584 million",
+    "gold_answer_numeric": 49584,
+    "answer_type": "categorical_plus_numeric",
+    "difficulty": "multi_fact_comparison",
+    "evidence": "| (In millions, except percentages) | 2024 | 2023 | Percentage Change | |--------------------------------------|-----------|-----------|---------------------| | Revenue | | | | | Productivity and Business Processes | $ 77,728 | $ 69,274 | 12%| | Intelligent Cloud | 105,362 | 87,907 | 20% | | More Personal Computing | 62,032 | 54,734 | 13% | | Total | $ 245,122 | $ 211,915 | 16% | | Operating Income | | | | | Productivity and Business Processes | $ 40,540 | $ 34,189 | 19% | | Intelligent Cloud | 49,584 | 37,884 | 31% | | More Personal Computing | 19,309 | 16,450 | 17% | | Total | $ 109,433 | $ 88,523| 24% |",
+    "source": "MSFT_10k_2024.pdf"
+  },
+  {
+    "id": "oracle_4",
+    "question": "What was Microsoft's net income for fiscal year 2022 (year ended June 30, 2022)?",
+    "gold_answer": "$72,738 million",
+    "gold_answer_numeric": 72738,
+    "answer_type": "numeric",
+    "difficulty": "single_fact",
+    "evidence": "| (In millions, except per share amounts) Year Ended June 30, | 2022 | 2021 | 2020 | |---------------------------------------------------------------|----------|----------|----------| | Revenue: | | | | | Product | $ 72,732 | $ 71,074 | $ 68,041 | | Service and other | 125,538 | 97,014 | 74,974 | | Total revenue | 198,270 | 168,088 | 143,015 | | Net income | $ 72,738 | $ 61,271 | $ 44,281 | | Earnings per share: | | | | | Basic | $ 9.70 | $ 8.12 | $ 5.82 | | Diluted | $ 9.65 | $ 8.05 | $ 5.76 |",
+    "source": "MSFT_10k_2022.pdf"
+  },
+  {
+    "id": "oracle_5",
+    "question": "By how much did Microsoft's net income grow, in dollar terms, from fiscal year 2020 to fiscal year 2022?",
+    "gold_answer": "$28,457 million ($72,738M minus $44,281M)",
+    "gold_answer_numeric": 28457,
+    "answer_type": "numeric_computed",
+    "difficulty": "multi_fact_arithmetic",
+    "evidence": "| (In millions, except per share amounts) Year Ended June 30, | 2022 | 2021 | 2020 | |---------------------------------------------------------------|----------|----------|----------| | Net income | $ 72,738 | $ 61,271 | $ 44,281 |",
+    "source": "MSFT_10k_2022.pdf"
+  },
+  {
+    "id": "oracle_6",
+    "question": "What was Microsoft's diluted earnings per share for fiscal year 2015?",
+    "gold_answer": "$1.48",
+    "gold_answer_numeric": 1.48,
+    "answer_type": "numeric",
+    "difficulty": "single_fact",
+    "evidence": "| Year Ended June 30, | 2015 | 2014 (b) | 2013 | 2012 | 2011 | |-----------------------------------------------------|--------------|------------|--------------|--------------|-----------| | Revenue | $ 93,580 | $ 86,833 | $ 77,849 | $ 73,723 | $ 69,943 | | Operating income | $ 18,161 (a) | $27,759 | $ 26,764 (c) | $ 21,763 (d) | $ 27,161 | | Net income | $ 12,193 (a) | $ 22,074 | $ 21,863 (c) | $ 16,978 (d) | $ 23,150 | | Diluted earnings per share | $ 1.48 (a) | $ 2.63 | $ 2.58 (c) | $ 2.00 (d) | $ 2.69 | | Total assets | $ 176,223 | $ 172,384 | $ 142,431 | $ 121,271 | $ 108,704 | | Stockholders' equity | $ 80,083 | $ 89,784 | $ 78,944 | $ 66,363 | $ 57,083 |",
+    "source": "MSFT_10k_2015.pdf"
+  },
+  {
+    "id": "oracle_7",
+    "question": "What were Microsoft's total assets as of June 30, 2014?",
+    "gold_answer": "$172,384 million",
+    "gold_answer_numeric": 172384,
+    "answer_type": "numeric",
+    "difficulty": "single_fact",
+    "evidence": "| Year Ended June 30, | 2015 | 2014 (b) | 2013 | 2012 | 2011 | |-----------------------------------------------------|--------------|------------|--------------|--------------|-----------| | Total assets | $ 176,223 | $ 172,384 | $ 142,431 | $ 121,271 | $ 108,704 | | Long-term obligations | $ 46,282 | $ 36,975 | $ 26,070 | $ 22,220 | $ 22,847 | | Stockholders' equity | $ 80,083 | $ 89,784 | $ 78,944 | $ 66,363 | $ 57,083 |",
+    "source": "MSFT_10k_2015.pdf"
+  },
+  {
+    "id": "oracle_8",
+    "question": "What was the difference in revenue growth rate (percentage) between the Intelligent Cloud and Productivity and Business Processes segments in fiscal year 2024?",
+    "gold_answer": "8 percentage points (Intelligent Cloud grew 20% vs Productivity and Business Processes 12%)",
+    "gold_answer_numeric": 8,
+    "answer_type": "numeric_computed",
+    "difficulty": "multi_fact_arithmetic",
+    "evidence": "| (In millions, except percentages) | 2024 | 2023 | Percentage Change | |--------------------------------------|-----------|-----------|---------------------| | Revenue | | | | | Productivity and Business Processes | $ 77,728 | $ 69,274 | 12%| | Intelligent Cloud | 105,362 | 87,907 | 20% | | More Personal Computing | 62,032 | 54,734 | 13% | | Total | $ 245,122 | $ 211,915 | 16% |",
+    "source": "MSFT_10k_2024.pdf"
+  }
+]

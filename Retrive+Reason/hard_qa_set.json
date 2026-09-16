@@ -1,0 +1,82 @@
+[
+  {
+    "id": "hard_1",
+    "question": "What was Microsoft's total revenue growth in dollar terms from fiscal year 2020 to fiscal year 2024?",
+    "gold_answer": "$102,107 million ($245,122M - $143,015M)",
+    "gold_answer_numeric": 102107,
+    "type": "numeric",
+    "difficulty": "cross_document_multihop"
+  },
+  {
+    "id": "hard_2",
+    "question": "What was Microsoft's non-GAAP adjusted net income for fiscal year 2023? (Note: this differs from the GAAP net income figure for the same year.)",
+    "gold_answer": "$73,307 million",
+    "gold_answer_numeric": 73307,
+    "type": "numeric",
+    "difficulty": "gaap_nongaap_discrimination"
+  },
+  {
+    "id": "hard_3",
+    "question": "What was the difference between GAAP operating income and non-GAAP adjusted operating income for fiscal year 2023?",
+    "gold_answer": "$1,171 million ($89,694M - $88,523M)",
+    "gold_answer_numeric": 1171,
+    "type": "numeric",
+    "difficulty": "gaap_nongaap_arithmetic"
+  },
+  {
+    "id": "hard_4",
+    "question": "Which fiscal year had higher operating income: FY2014 or FY2022, and by how much?",
+    "gold_answer": "FY2022, higher by $55,624 million ($83,383M - $27,759M)",
+    "gold_answer_numeric": 55624,
+    "type": "numeric",
+    "difficulty": "cross_document_multihop"
+  },
+  {
+    "id": "hard_5",
+    "question": "By approximately what percentage did Microsoft's total revenue grow from fiscal year 2015 to fiscal year 2024?",
+    "gold_answer": "approximately 161.9% (from $93,580M to $245,122M)",
+    "gold_answer_numeric": 161.9,
+    "type": "numeric",
+    "difficulty": "cross_document_multihop_percentage"
+  },
+  {
+    "id": "hard_6",
+    "question": "What was Microsoft's stockholders' equity as of the end of fiscal year 2011?",
+    "gold_answer": "$57,083 million",
+    "gold_answer_numeric": 57083,
+    "type": "numeric",
+    "difficulty": "needle_in_haystack"
+  },
+  {
+    "id": "hard_7",
+    "question": "What was the combined operating income of Microsoft's Intelligent Cloud and More Personal Computing segments (excluding Productivity and Business Processes) in fiscal year 2024?",
+    "gold_answer": "$68,893 million ($49,584M + $19,309M)",
+    "gold_answer_numeric": 68893,
+    "type": "numeric",
+    "difficulty": "selective_aggregation"
+  },
+  {
+    "id": "hard_8",
+    "question": "What percentage of Microsoft's income before income taxes was paid as the provision for income taxes in fiscal year 2022?",
+    "gold_answer": "approximately 13.1% ($10,978M / $83,716M)",
+    "gold_answer_numeric": 13.1,
+    "type": "numeric",
+    "difficulty": "computed_ratio"
+  },
+  {
+    "id": "hard_9",
+    "question": "Which of Microsoft's three segments had revenue growth below 15% in fiscal year 2024? Name all that apply.",
+    "gold_answer": "Productivity and Business Processes (12%) and More Personal Computing (13%)",
+    "gold_answer_numeric": null,
+    "type": "categorical_list",
+    "difficulty": "exhaustive_selection"
+  },
+  {
+    "id": "hard_10",
+    "question": "What was the increase in Microsoft's diluted earnings per share from fiscal year 2012 to fiscal year 2014?",
+    "gold_answer": "$0.63 ($2.63 - $2.00)",
+    "gold_answer_numeric": 0.63,
+    "type": "numeric",
+    "difficulty": "needle_in_haystack_arithmetic"
+  }
+]

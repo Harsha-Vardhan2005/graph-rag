@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinReflectKG: Agentic GraphRAG System</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-main">
+        <div class="title-group">
+          <h1>FinReflectKG</h1>
+          <span class="subtitle">Agentic Knowledge Graph RAG for Financial SEC 10-K Question Answering</span>
+        </div>
+        <div class="scope-badge">
+          <span class="badge-dot"></span>
+          <span>Indexed Scope: AAPL & MSFT (51,927 Triplets)</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="explorer-tab">1. Unified Query Explorer</button>
+        <button class="tab-btn" data-tab="routing-tab">2. Adaptive Routing Inspector</button>
+        <button class="tab-btn" data-tab="formatting-tab">3. Structured Evidence Inspector</button>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- ==================== TAB 1: UNIFIED EXPLORER ==================== -->
+      <section id="explorer-tab" class="tab-content active">
+        <!-- Search & Preset Panel -->
+        <div class="card control-card">
+          <div class="card-header">
+            <h3>Financial Query Input</h3>
+            <span class="hint">Type any custom question or select a verified benchmark prompt</span>
+          </div>
+          
+          <div class="input-wrapper">
+            <input type="text" id="query-input" placeholder="e.g., What are Apple's principal risk factors affecting supply chain?" value="What risk factors and market conditions affect Apple's supply chain and revenue?">
+            <button id="submit-btn" class="btn btn-primary">Execute Query</button>
+          </div>
+
+          <!-- Preset Pills -->
+          <div class="presets-container">
+            <span class="presets-label">Preset Evaluation Queries:</span>
+            <div class="preset-chips">
+              <button class="chip" data-query="What is the general business description and principal products of Apple Inc?">
+                <span class="chip-type type-vector">Vector</span>
+                Apple Business Overview
+              </button>
+              <button class="chip" data-query="What risk factors and market conditions affect Apple's supply chain and revenue?">
+                <span class="chip-type type-graph">Graph</span>
+                Apple Risk & Market Factors
+              </button>
+              <button class="chip" data-query="What was Apple's percentage change in net sales from 2021 to 2022?">
+                <span class="chip-type type-symbolic">Symbolic</span>
+                Apple YoY Net Sales Growth
+              </button>
+              <button class="chip" data-query="Which regulatory bodies oversee Apple regarding its financial disclosures?">
+                <span class="chip-type type-graph">Graph</span>
+                Apple Regulatory Oversight
+              </button>
+              <button class="chip" data-query="Which key financial metrics does Microsoft disclose in its SEC reports?">
+                <span class="chip-type type-graph">Graph</span>
+                Microsoft Financial Metrics
+              </button>
+              <button class="chip" data-query="What are Tesla's delivery numbers for the current year?">
+                <span class="chip-type type-scope">Out-of-Scope</span>
+                Tesla Query (Guardrail Test)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Results Display -->
+        <div id="loading-spinner" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p id="loading-text">Routing query and retrieving Knowledge Graph evidence...</p>
+        </div>
+
+        <div id="results-panel" class="results-panel">
+          
+          <!-- Route Decision Banner -->
+          <div class="card route-card" id="route-banner">
+            <div class="route-header">
+              <span class="section-label">Pipeline Execution Route</span>
+              <div class="route-badges">
+                <span id="route-badge" class="badge badge-route">GRAPH_MULTIHOP</span>
+                <span id="confidence-badge" class="badge badge-subtle">Confidence: 95%</span>
+              </div>
+            </div>
+            <p id="route-rationale" class="route-rationale">
+              Detected relational entity keywords; routed to Knowledge Graph Traversal.
+            </p>
+          </div>
+
+          <!-- Side-by-side Evidence & Answer Cards -->
+          <div class="grid-2col">
+            
+            <!-- Left: Retrieved Evidence Context -->
+            <div class="card evidence-card">
+              <div class="card-header">
+                <h3>Retrieved Evidence Context</h3>
+                <span id="evidence-count-badge" class="badge badge-subtle">12 Triples</span>
+              </div>
+              <div id="evidence-viewer" class="evidence-viewer markdown-body">
+                <p class="placeholder-text">Submit a query to inspect retrieved Knowledge Graph evidence tables or SEC text passages.</p>
+              </div>
+            </div>
+
+            <!-- Right: Synthesized Answer -->
+            <div class="card answer-card">
+              <div class="card-header">
+                <h3>Synthesized Analysis</h3>
+                <span id="latency-badge" class="badge badge-accent">Latency: --</span>
+              </div>
+              <div id="answer-viewer" class="answer-viewer markdown-body">
+                <p class="placeholder-text">Generated answer will appear here upon query execution.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: ADAPTIVE ROUTING INSPECTOR ==================== -->
+      <section id="routing-tab" class="tab-content">
+        <div class="card control-card">
+          <div class="card-header">
+            <h3>Adaptive Routing Latency Ablation</h3>
+            <span class="hint">Compare Fast-Path Vector Search vs Multi-Hop Graph Traversal</span>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="route-ablation-input" value="What is the general business description and principal products of Apple Inc?">
+            <button id="run-route-ablation-btn" class="btn btn-primary">Compare Routes</button>
+          </div>
+        </div>
+
+        <div id="route-ablation-results" class="ablation-results hidden">
+          <div class="card summary-card">
+            <div class="summary-stat-group">
+              <div class="stat-box">
+                <span class="stat-label">Recommended Route</span>
+                <span id="ablation-rec-route" class="stat-value text-accent">SIMPLE_VECTOR</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Fast-Path Latency</span>
+                <span id="ablation-vec-time" class="stat-value text-emerald">0.29s</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Full Graph Latency</span>
+                <span id="ablation-graph-time" class="stat-value text-amber">0.82s</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Latency Reduction</span>
+                <span id="ablation-savings" class="stat-value text-emerald">-64.6%</span>
+              </div>
+            </div>
+            <p id="ablation-route-reason" class="summary-note"></p>
+          </div>
+
+          <div class="grid-2col">
+            <div class="card">
+              <div class="card-header">
+                <h4>Route 1: Fast-Path Vector Search</h4>
+                <span class="badge badge-emerald">Low Latency</span>
+              </div>
+              <div id="ablation-vec-answer" class="markdown-body answer-viewer"></div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h4>Route 2: Multi-Hop Graph Traversal</h4>
+                <span class="badge badge-amber">Deep Relational</span>
+              </div>
+              <div id="ablation-graph-answer" class="markdown-body answer-viewer"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: EVIDENCE FORMATTING INSPECTOR ==================== -->
+      <section id="formatting-tab" class="tab-content">
+        <div class="card control-card">
+          <div class="card-header">
+            <h3>Structured Evidence Formatting Ablation</h3>
+            <span class="hint">Compare Raw Flat Graph Triples vs Typed Categorized Markdown Tables</span>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="format-ablation-input" value="Which key financial metrics does Microsoft disclose in its SEC reports?">
+            <button id="run-format-ablation-btn" class="btn btn-primary">Run Formatting Ablation</button>
+          </div>
+        </div>
+
+        <div id="format-ablation-results" class="ablation-results hidden">
+          <div class="grid-2col">
+            <!-- Baseline: Raw Triples -->
+            <div class="card">
+              <div class="card-header">
+                <h4>Baseline: Raw Flat Triples</h4>
+                <span class="badge badge-subtle">Unstructured</span>
+              </div>
+              <div class="sub-section">
+                <span class="sub-title">Prompt Evidence Passed to LLM:</span>
+                <pre id="raw-evidence-pre" class="code-block"></pre>
+              </div>
+              <div class="sub-section">
+                <span class="sub-title">Synthesized Answer:</span>
+                <div id="raw-answer-div" class="markdown-body answer-viewer"></div>
+              </div>
+            </div>
+
+            <!-- Proposed: Structured Markdown Tables -->
+            <div class="card highlight-card">
+              <div class="card-header">
+                <h4>Proposed: Typed Markdown Tables</h4>
+                <span class="badge badge-emerald">Categorized & Prioritized</span>
+              </div>
+              <div class="sub-section">
+                <span class="sub-title">Prompt Evidence Passed to LLM:</span>
+                <div id="struct-evidence-div" class="markdown-body code-block-rendered"></div>
+              </div>
+              <div class="sub-section">
+                <span class="sub-title">Synthesized Answer:</span>
+                <div id="struct-answer-div" class="markdown-body answer-viewer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>FinReflectKG Architecture Demo | Knowledge Graph & Agentic RAG Evaluation</span>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+[
+  {
+    "type1": "PERSON",
+    "rel1": "discloses",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 135735
+  },
+  {
+    "type1": "ORG_REG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 135735
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "announces",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 126686
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "has_stake_in",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 117637
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "join",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 81441
+  },
+  {
+    "type1": "COMP",
+    "rel1": "audit",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 72392
+  },
+  {
+    "type1": "COMP",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 63343
+  },
+  {
+    "type1": "ORG",
+    "rel1": "has_stake_in",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 54294
+  },
+  {
+    "type1": "COMP",
+    "rel1": "distributes",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 45245
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "face",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 36196
+  },
+  {
+    "type1": "ORG",
+    "rel1": "audit",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 27147
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "works_for",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 27147
+  },
+  {
+    "type1": "COMP",
+    "rel1": "involved_in",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 27147
+  },
+  {
+    "type1": "ORG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_METRIC",
+    "freq": 27147
+  },
+  {
+    "type1": "ORG_REG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 20325
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "discloses",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 20325
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "announces",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 18970
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "discloses",
+    "type2": "ORG",
+    "rel2": "increase",
+    "type3": "FIN_METRIC",
+    "freq": 17925
+  },
+  {
+    "type1": "ORG_REG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "increase",
+    "type3": "FIN_METRIC",
+    "freq": 17925
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "has_stake_in",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 17615
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "announces",
+    "type2": "ORG",
+    "rel2": "increase",
+    "type3": "FIN_METRIC",
+    "freq": 16730
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "has_stake_in",
+    "type2": "ORG",
+    "rel2": "increase",
+    "type3": "FIN_METRIC",
+    "freq": 15535
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "join",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 12195
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "discloses",
+    "type2": "ORG",
+    "rel2": "produce",
+    "type3": "PRODUCT",
+    "freq": 11985
+  },
+  {
+    "type1": "ORG_REG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "produce",
+    "type3": "PRODUCT",
+    "freq": 11985
+  },
+  {
+    "type1": "ORG_REG",
+    "rel1": "regulates",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "ACCOUNTING_POLICY",
+    "freq": 11685
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "discloses",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "ACCOUNTING_POLICY",
+    "freq": 11685
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "announces",
+    "type2": "ORG",
+    "rel2": "produce",
+    "type3": "PRODUCT",
+    "freq": 11186
+  },
+  {
+    "type1": "PERSON",
+    "rel1": "announces",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "ACCOUNTING_POLICY",
+    "freq": 10906
+  },
+  {
+    "type1": "COMP",
+    "rel1": "audit",
+    "type2": "ORG",
+    "rel2": "discloses",
+    "type3": "FIN_INST",
+    "freq": 10840
+  }
+]
