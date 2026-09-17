@@ -36,6 +36,7 @@ class RouteType(str, Enum):
     SIMPLE_VECTOR = "SIMPLE_VECTOR"
     GRAPH_MULTIHOP = "GRAPH_MULTIHOP"
     SYMBOLIC_COMPUTE = "SYMBOLIC_COMPUTE"
+    HYBRID = "HYBRID"
 
 
 class QueryRouter:
@@ -58,6 +59,13 @@ class QueryRouter:
             "has_stake_in", "stake", "subsidiary", "segment", "partner", "ownership",
             "depends_on", "produce", "discloses", "disclose", "disclosed", "disclosure", "disclosures",
             "metric", "metrics", "financial metric", "financial metrics"
+        }
+
+        # Narrative / Descriptive keywords
+        self.narrative_keywords = {
+            "overview", "description", "describe", "explain", "how does", "what is the general",
+            "business model", "principal products", "background", "strategy", "comprehensive",
+            "narrative", "details", "discuss", "affect and explain"
         }
 
         # Calculation & temporal keywords
@@ -103,34 +111,53 @@ class QueryRouter:
                 }
             }
 
-        # 2. Check for Structured Graph Relations
+        # Check keyword matches
         matched_graph_keys = [k for k in self.graph_keywords if k in q_lower]
+        matched_narrative_keys = [k for k in self.narrative_keywords if k in q_lower]
+        ticker = "MSFT" if "microsoft" in q_lower or "msft" in q_lower else "AAPL"
+
+        # Map query keywords to exact graph relation types
+        rel_types = []
+        if any(k in q_lower for k in ["regulat", "oversee", "sec", "doj"]):
+            rel_types.append("regulates")
+        if any(k in q_lower for k in ["litigat", "lawsuit", "subject_to", "legal"]):
+            rel_types.append("subject_to")
+        if any(k in q_lower for k in ["negatively", "impact", "risk", "condition"]):
+            rel_types.extend(["negatively_impacts", "impacted_by"])
+        if any(k in q_lower for k in ["stake", "ownership", "segment"]):
+            rel_types.extend(["has_stake_in", "discloses"])
+        if any(k in q_lower for k in ["disclose", "metric"]):
+            rel_types.extend(["discloses", "has_stake_in"])
+        if any(k in q_lower for k in ["produce", "product"]):
+            rel_types.extend(["produce", "positively_impacts"])
+
+        final_rels = list(set(rel_types)) or ["discloses"]
+        conn_info = self.connectivity_scorer.evaluate_connectivity(ticker, final_rels)
+
+        # 2. Check for HYBRID Dual Intent (Narrative + High Graph Density)
+        has_narrative = len(matched_narrative_keys) >= 1 or any(p in q_lower for p in ["overview", "describe", "explain how", "factors and"])
+        has_graph = len(matched_graph_keys) >= 2 or any(k in q_lower for k in [
+            "regulatory bodies", "litigation", "market conditions", "supply chain", "risk factors", "financial metrics"
+        ])
+
+        if has_narrative and has_graph and conn_info["matched_edge_count"] > 500:
+            return {
+                "route": RouteType.HYBRID,
+                "confidence": 0.96,
+                "reasoning": f"Detected dual intent: narrative context ({matched_narrative_keys[:2]}) + high graph density ({conn_info['matched_edge_count']} edges). Routing to Parallel Hybrid Retrieval.",
+                "metadata": {
+                    "ticker": ticker,
+                    "relation_types": final_rels,
+                    "graph_connectivity": conn_info,
+                    "is_parallel_hybrid": True
+                }
+            }
+
+        # 3. Check for Structured Graph Relations
         if len(matched_graph_keys) >= 2 or any(k in q_lower for k in [
             "regulatory bodies", "litigation", "market conditions", "stake in", "regulates",
             "financial metrics", "disclose", "discloses", "disclosures", "oversee"
         ]):
-            ticker = "MSFT" if "microsoft" in q_lower or "msft" in q_lower else "AAPL"
-            
-            # Map query keywords to exact graph relation types
-            rel_types = []
-            if any(k in q_lower for k in ["regulat", "oversee", "sec", "doj"]):
-                rel_types.append("regulates")
-            if any(k in q_lower for k in ["litigat", "lawsuit", "subject_to", "legal"]):
-                rel_types.append("subject_to")
-            if any(k in q_lower for k in ["negatively", "impact", "risk", "condition"]):
-                rel_types.extend(["negatively_impacts", "impacted_by"])
-            if any(k in q_lower for k in ["stake", "ownership", "segment"]):
-                rel_types.extend(["has_stake_in", "discloses"])
-            if any(k in q_lower for k in ["disclose", "metric"]):
-                rel_types.extend(["discloses", "has_stake_in"])
-            if any(k in q_lower for k in ["produce", "product"]):
-                rel_types.extend(["produce", "positively_impacts"])
-
-            final_rels = list(set(rel_types)) or ["discloses"]
-
-            # Compute topological connectivity confidence signal
-            conn_info = self.connectivity_scorer.evaluate_connectivity(ticker, final_rels)
-
             return {
                 "route": RouteType.GRAPH_MULTIHOP,
                 "confidence": conn_info["graph_confidence"],
@@ -159,15 +186,16 @@ class QueryRouter:
         prompt = f"""You are a query routing controller for a Financial Knowledge Graph RAG system.
 Classify the following query into exactly ONE route:
 
-1. SIMPLE_VECTOR: Open-ended descriptions, business philosophy, narrative text, general business overviews.
-2. GRAPH_MULTIHOP: Questions about specific named relationships, regulatory bodies, disclosures, litigations, market conditions, suppliers, or multi-hop entity connections.
+1. SIMPLE_VECTOR: Pure open-ended descriptions, business philosophy, narrative text, general company overviews.
+2. GRAPH_MULTIHOP: Questions focused specifically on named relationships, regulatory bodies, litigations, market conditions, or multi-hop entity connections.
 3. SYMBOLIC_COMPUTE: Questions requiring numeric arithmetic, YoY growth, percentage change across multiple fiscal years.
+4. HYBRID: Multi-faceted questions that require BOTH narrative textual explanation from SEC filing passages AND structured entity-relationship/metric data from Knowledge Graph triples.
 
 Query: "{query}"
 
 Output ONLY valid JSON in this exact structure:
 {{
-  "route": "SIMPLE_VECTOR" | "GRAPH_MULTIHOP" | "SYMBOLIC_COMPUTE",
+  "route": "SIMPLE_VECTOR" | "GRAPH_MULTIHOP" | "SYMBOLIC_COMPUTE" | "HYBRID",
   "confidence": 0.0 to 1.0,
   "reasoning": "Brief explanation of decision.",
   "metadata": {{
@@ -235,8 +263,8 @@ Output ONLY valid JSON in this exact structure:
         decision["metadata"]["extracted_entities"] = entity_info["entities"]
         decision["metadata"]["entity_types"] = entity_info["entity_types"]
 
-        # Step 4: If GRAPH_MULTIHOP, compute PPR Triples Ranking
-        if decision["route"] == RouteType.GRAPH_MULTIHOP:
+        # Step 4: If GRAPH_MULTIHOP or HYBRID, compute PPR Triples Ranking
+        if decision["route"] in [RouteType.GRAPH_MULTIHOP, RouteType.HYBRID]:
             ticker = decision["metadata"].get("ticker", entity_info["ticker"])
             rel_types = decision["metadata"].get("relation_types", ["discloses"])
             seed_names = [e["name"] for e in entity_info["entities"]] or [ticker.lower()]
@@ -257,12 +285,13 @@ if __name__ == "__main__":
     test_queries = [
         "What is the general business description and principal products of Apple Inc?",
         "What risk factors and market conditions affect Apple's supply chain and revenue?",
+        "Provide an overview and explain how supply chain risk factors and market conditions impact Apple's revenue?",
         "What was Apple's percentage change in net sales from 2021 to 2022?",
         "Which key financial metrics does Microsoft disclose in its SEC reports?"
     ]
 
     print("=" * 70)
-    print("Testing Upgraded Router with Entity Extractor, Graph Connectivity & PPR")
+    print("Testing Upgraded Router with Entity Extractor, Graph Connectivity, PPR & HYBRID Route")
     print("=" * 70)
     for q in test_queries:
         res = router.route(q)

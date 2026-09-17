@@ -129,6 +129,9 @@ async def execute_query(req: QueryRequest):
         exec_res = rag_pipeline._execute_graph_route(query_text, route_decision)
     elif selected_route == "SYMBOLIC_COMPUTE":
         exec_res = rag_pipeline._execute_symbolic_route(query_text, route_decision)
+    elif selected_route == "HYBRID":
+        rag_pipeline.enable_structured_formatting = req.enable_formatting
+        exec_res = rag_pipeline._execute_hybrid_route(query_text, route_decision)
     else:
         exec_res = rag_pipeline._execute_vector_route(query_text)
 
@@ -161,7 +164,7 @@ async def execute_query(req: QueryRequest):
 
 @app.post("/api/route_ablation")
 async def route_ablation(req: RouteAblationRequest):
-    """Compares Fast-Path Vector vs Full Graph execution latency and output."""
+    """Compares Fast-Path Vector vs Full Graph vs Parallel Hybrid execution latency and output."""
     query_text = req.query.strip()
     if not query_text:
         raise HTTPException(status_code=400, detail="Query text cannot be empty.")
@@ -179,6 +182,11 @@ async def route_ablation(req: RouteAblationRequest):
     graph_res = rag_pipeline._execute_graph_route(query_text, route_decision)
     t_g = time.time() - t_g0
 
+    # 4. Parallel Hybrid Path (Merged Vector + Graph)
+    t_h0 = time.time()
+    hybrid_res = rag_pipeline._execute_hybrid_route(query_text, route_decision)
+    t_h = time.time() - t_h0
+
     savings_pct = round(((t_g - t_v) / t_g) * 100, 1) if t_g > 0 else 0.0
 
     return {
@@ -191,11 +199,20 @@ async def route_ablation(req: RouteAblationRequest):
         "ppr_ranked_triples_count": len(route_decision.get("metadata", {}).get("ppr_ranked_triples", [])),
         "vector_route": {
             "latency_sec": round(t_v, 3),
+            "evidence_count": vec_res.get("evidence_count", 0),
             "answer": vec_res.get("answer", "")
         },
         "graph_route": {
             "latency_sec": round(t_g, 3),
+            "evidence_count": graph_res.get("evidence_count", 0),
             "answer": graph_res.get("answer", "")
+        },
+        "hybrid_route": {
+            "latency_sec": round(t_h, 3),
+            "evidence_count": hybrid_res.get("evidence_count", 0),
+            "graph_count": hybrid_res.get("graph_evidence_count", 0),
+            "vector_count": hybrid_res.get("vector_evidence_count", 0),
+            "answer": hybrid_res.get("answer", "")
         },
         "latency_savings_pct": savings_pct
     }

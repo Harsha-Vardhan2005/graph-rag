@@ -212,12 +212,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const vecBadge = document.getElementById("ablation-vec-badge");
-      if (vecBadge) vecBadge.textContent = `${data.vector_route.latency_sec}s`;
+      if (vecBadge) vecBadge.textContent = `${data.vector_route.latency_sec}s (${data.vector_route.evidence_count || 4} chunks)`;
       const graphBadge = document.getElementById("ablation-graph-badge");
-      if (graphBadge) graphBadge.textContent = `${data.graph_route.latency_sec}s`;
+      if (graphBadge) graphBadge.textContent = `${data.graph_route.latency_sec}s (${data.graph_route.evidence_count || 12} triples)`;
+      const hybridBadge = document.getElementById("ablation-hybrid-badge");
+      if (hybridBadge && data.hybrid_route) {
+        hybridBadge.textContent = `${data.hybrid_route.latency_sec}s (${data.hybrid_route.evidence_count} merged facts)`;
+      }
 
       document.getElementById("ablation-vec-answer").innerHTML = marked.parse(data.vector_route.answer);
       document.getElementById("ablation-graph-answer").innerHTML = marked.parse(data.graph_route.answer);
+      const hybridAnsEl = document.getElementById("ablation-hybrid-answer");
+      if (hybridAnsEl && data.hybrid_route) {
+        hybridAnsEl.innerHTML = marked.parse(data.hybrid_route.answer);
+      }
     } catch (err) {
       alert("Error running route ablation: " + err.message);
     } finally {

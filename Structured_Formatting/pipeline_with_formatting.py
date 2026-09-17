@@ -273,6 +273,142 @@ Question: {query}"""
             "evidence_type": "symbolic_arithmetic"
         }
 
+    def _retrieve_vector_chunks(self, query: str, top_k: int = 3) -> list:
+        """Helper to retrieve top-k semantic text passages from SEC filings."""
+        q_lower = query.lower()
+        is_msft = "microsoft" in q_lower or "msft" in q_lower
+
+        if is_msft:
+            df_msft = self.df_kg[self.df_kg["ticker"] == "MSFT"]
+            msft_chunks = df_msft["chunk_text"].dropna().drop_duplicates().reset_index(drop=True)
+            if not msft_chunks.empty:
+                msft_embs = self.embed_model.encode(msft_chunks.tolist()[:50], show_progress_bar=False, batch_size=32)
+                q_emb = self.embed_model.encode(["Represent this sentence for searching relevant passages: " + query])[0]
+                sims = np.dot(msft_embs, q_emb) / (
+                    np.linalg.norm(msft_embs, axis=1) * np.linalg.norm(q_emb)
+                )
+                top_idx = np.argsort(sims)[::-1][:top_k]
+                return msft_chunks.iloc[top_idx].tolist()
+            return self.chunks.iloc[:top_k].tolist()
+        else:
+            q_emb = self.embed_model.encode(["Represent this sentence for searching relevant passages: " + query])[0]
+            sims = np.dot(self.chunk_embeddings, q_emb) / (
+                np.linalg.norm(self.chunk_embeddings, axis=1) * np.linalg.norm(q_emb)
+            )
+            top_idx = np.argsort(sims)[::-1][:top_k]
+            return self.chunks.iloc[top_idx].tolist()
+
+    def _retrieve_graph_facts(self, query: str, route_info: dict, top_k: int = 10) -> list:
+        """Helper to retrieve structured KG triples using PPR rankings or Cypher."""
+        ppr_triples = route_info.get("metadata", {}).get("ppr_ranked_triples", [])
+        if ppr_triples:
+            return [t["triple_str"] for t in ppr_triples[:top_k]]
+
+        ticker = route_info.get("metadata", {}).get("ticker", "AAPL")
+        rel_types = route_info.get("metadata", {}).get("relation_types", ["discloses"])
+
+        graph_facts = []
+        if self.driver:
+            cypher_query = """
+            MATCH (a:Entity)-[r:RELATION]->(b:Entity)
+            WHERE (a.ticker = $ticker OR b.ticker = $ticker) AND r.type IN $rel_types
+            RETURN a.name AS src, a.entity_type AS src_type, r.type AS rel, b.name AS tgt, b.entity_type AS tgt_type
+            LIMIT $limit
+            """
+            try:
+                with self.driver.session() as session:
+                    records = list(session.run(cypher_query, ticker=ticker, rel_types=rel_types, limit=top_k))
+                    graph_facts = [
+                        f"[{r['src_type']}] {r['src']} --{r['rel']}--> [{r['tgt_type']}] {r['tgt']}"
+                        for r in records
+                    ]
+            except Exception:
+                graph_facts = []
+
+        if not graph_facts:
+            sub = self.df_kg[(self.df_kg['ticker'] == ticker) & (self.df_kg['relationship'].isin(rel_types))]
+            if sub.empty and "discloses" not in rel_types:
+                sub = self.df_kg[(self.df_kg['ticker'] == ticker) & (self.df_kg['relationship'].isin(rel_types + ["discloses", "impacted_by"]))]
+            records = sub.head(top_k)
+            graph_facts = [
+                f"[{r['entity_type']}] {r['entity']} --{r['relationship']}--> [{r['target_type']}] {r['target']}"
+                for _, r in records.iterrows()
+            ]
+
+        return graph_facts
+
+    def _execute_hybrid_route(self, query: str, route_info: dict, top_k_vec: int = 3, top_k_graph: int = 10) -> dict:
+        """
+        True Parallel Hybrid Retrieval:
+        Executes Dense Vector Search and Knowledge Graph Traversal in parallel via ThreadPoolExecutor.
+        Merges structured facts (typed tables) with narrative filing text passages for synthesis.
+        """
+        import concurrent.futures
+        t0 = time.time()
+
+        # Execute Vector search and Graph traversal concurrently
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+            future_vec = executor.submit(self._retrieve_vector_chunks, query, top_k_vec)
+            future_graph = executor.submit(self._retrieve_graph_facts, query, route_info, top_k_graph)
+            
+            retrieved_chunks = future_vec.result()
+            graph_facts = future_graph.result()
+
+        # 1. Format Structured KG Evidence
+        if self.enable_structured_formatting and graph_facts:
+            formatted_graph_part = format_structured_evidence(graph_facts, query=query)
+        else:
+            formatted_graph_part = "\n".join(graph_facts) if graph_facts else "No direct relationship triples found."
+
+        # 2. Format Dense Narrative Passages
+        formatted_vec_part = "\n\n".join(
+            f"**[SEC 10-K Excerpt {i+1}]:** {c[:500]}..." 
+            for i, c in enumerate(retrieved_chunks)
+        )
+
+        # 3. Unified Hybrid Evidence Context (Structured KG Triples + Narrative Passages)
+        merged_evidence_context = f"""### 📊 Knowledge Graph Structured Evidence (Entity-Relation Triples):
+{formatted_graph_part}
+
+---
+### 📄 SEC 10-K Filing Narrative Context (Disclosures & Explanations):
+{formatted_vec_part}"""
+
+        # 4. Multi-Modal Financial Synthesis Prompt
+        prompt = f"""You are an advanced financial research analyst.
+Answer the financial question below by synthesizing BOTH:
+1. The **Knowledge Graph Structured Evidence** (for exact entity relationships, metrics, and regulators).
+2. The **SEC 10-K Filing Narrative Context** (for qualitative explanations, operational context, and reasons).
+
+Requirements:
+- Be clear, rigorous, and directly answer the question.
+- Cite specific named entities, metrics, or relationships when referencing facts.
+
+Evidence Context:
+{merged_evidence_context}
+
+Question: {query}"""
+
+        resp = groq_client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+            max_tokens=400
+        )
+        latency = time.time() - t0
+
+        return {
+            "route_taken": "HYBRID",
+            "answer": resp.choices[0].message.content.strip(),
+            "latency_sec": round(latency, 2),
+            "evidence_count": len(graph_facts) + len(retrieved_chunks),
+            "graph_evidence_count": len(graph_facts),
+            "vector_evidence_count": len(retrieved_chunks),
+            "evidence_type": "hybrid_multimodal",
+            "parallel_execution": True,
+            "evidence_context_used": merged_evidence_context
+        }
+
     def answer_query(self, query: str) -> dict:
         """Main entry point: routes and answers query."""
         t_start = time.time()
@@ -285,6 +421,8 @@ Question: {query}"""
             exec_result = self._execute_graph_route(query, route_decision)
         elif target_route == RouteType.SYMBOLIC_COMPUTE:
             exec_result = self._execute_symbolic_route(query, route_decision)
+        elif target_route == RouteType.HYBRID:
+            exec_result = self._execute_hybrid_route(query, route_decision)
         else:
             exec_result = self._execute_vector_route(query)
 

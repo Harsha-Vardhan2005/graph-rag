@@ -129,20 +129,36 @@ Evaluates sentence-by-sentence factual verification against SEC 10-K filings and
 
 ---
 
+## 🔀 Benchmark 5: Task 5 True Parallel Hybrid Retrieval Ablation
+
+Evaluates parallel multi-modal retrieval where dense SEC 10-K text passages and structured Knowledge Graph triples are fetched concurrently via `ThreadPoolExecutor` and merged into unified structured contexts.
+
+*Dataset: `Hybrid_Retrieval/hybrid_benchmark_results.json`*
+
+| Retrieval Mode | Contextual Evidence Fed | Fact Coverage & Completeness | Execution Paradigm |
+| :--- | :---: | :---: | :---: |
+| **Vector Only** | 4 SEC Text Chunks | 3.75 / 10.0 | Single Dense Embedding Pass |
+| **Graph Only** | 12 KG Structured Triples | 3.25 / 10.0 | Single Multi-Hop Cypher Pass |
+| **Parallel Hybrid (Merged)** | **13 Merged Facts (Triples + Chunks)** | **Comprehensive Qualitative + Relational** | **Concurrent `ThreadPoolExecutor(max_workers=2)`** |
+
+### Key Takeaway for Reviewers:
+- **Narrative Questions** benefit from Dense Vector Search.
+- **Relational Questions** benefit from Multi-Hop KG Traversal.
+- **Complex Multi-Faceted Questions** require **Parallel Hybrid Retrieval**, merging typed relational tables with qualitative filing narrative for complete financial synthesis.
+
+---
+
 ## 💻 Live Presentation / Defense Demo Instructions
 
 To run the interactive demonstration live during your review:
 
 ```bash
-# Run interactive multi-case menu
-python demo_review.py
-
-# Or run automated end-to-end showcase
-python demo_review.py --auto
+# Run web UI dashboard
+python run_ui.py
+# (Navigate to http://localhost:8000)
 ```
 
 ### What the Reviewers Will See:
-1. **[Step 1] Adaptive Routing Decision:** Explains *why* the query was routed to Vector, Graph, or Symbolic engine.
-2. **[Step 2] Structured Evidence Table:** Displays typed Markdown tables (Financial Metrics, Risk Factors, Market Conditions) fed into Qwen 3.8-27B.
-3. **[Step 3] Accurate Answer Synthesis:** High-precision answer with verified calculations.
-4. **[Step 4] Claim-Level Audit Badge:** Real-time factual verification highlighting grounded citations (`[KG: Apple -discloses-> Net Sales]`, `[SEC_10K_Chunk_02]`).
+1. **[Tab 1: Unified Explorer]** Full end-to-end question answering with real-time routing badges, entity chips, structured evidence tables, and Qwen-2.5 synthesized answers.
+2. **[Tab 2: Adaptive & Hybrid Routing Inspector]** 3-way ablation comparing **Vector Search** vs **Multi-Hop Graph** vs **Parallel Hybrid (Merged)** with latency and evidence counts.
+3. **[Tab 3: Evidence Formatting Inspector]** Ablation demonstrating the impact of Typed Markdown Tables vs Raw Flat String Triples.

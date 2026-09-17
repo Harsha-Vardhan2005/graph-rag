@@ -1,0 +1,122 @@
+{
+  "benchmark_name": "Task 5: True Parallel Hybrid Retrieval Multi-Modal Ablation",
+  "timestamp": "2026-09-16 22:49:15",
+  "total_queries": 4,
+  "results": [
+    {
+      "query_id": "HQ-1",
+      "query": "Provide a comprehensive overview of Apple's principal products and explain how supply chain risk factors and market conditions impact its revenue.",
+      "intent": "Hybrid (Products Narrative + Supply Chain/Revenue Graph)",
+      "vector_only": {
+        "completeness_score": 5.0,
+        "latency_sec": 6.598,
+        "evidence_count": 4,
+        "answer_snippet": "Based on the retrieved filing passages, here is a comprehensive overview of Apple\u2019s principal products and an explanation of how supply chain risk factors and market conditions imp..."
+      },
+      "graph_only": {
+        "completeness_score": 5.0,
+        "latency_sec": 3.115,
+        "evidence_count": 12,
+        "answer_snippet": "Based **ONLY** on the provided Knowledge Graph evidence, here is the overview of Apple's principal products:\n\n**Principal Products Produced by Apple (AAPL)**\nThe evidence explicitl..."
+      },
+      "parallel_hybrid": {
+        "completeness_score": 5.0,
+        "latency_sec": 1.043,
+        "graph_triples": 10,
+        "vector_chunks": 3,
+        "total_evidence": 13,
+        "answer_snippet": "Based on the synthesis of the Knowledge Graph Structured Evidence and the SEC 10-K Filing Narrative Context, here is a comprehensive overview of Apple\u2019s principal products and an a..."
+      }
+    },
+    {
+      "query_id": "HQ-2",
+      "query": "Which key operating segments and financial metrics does Microsoft disclose in its SEC filings, and what competitive factors affect them?",
+      "intent": "Hybrid (Segments/Metrics Triples + Competitive Narrative)",
+      "vector_only": {
+        "completeness_score": 6.0,
+        "latency_sec": 12.127,
+        "evidence_count": 4,
+        "answer_snippet": "Based on the retrieved filing passages, the specific key operating segments and financial metrics are **not disclosed**. The provided text consists only of the cover page, table of..."
+      },
+      "graph_only": {
+        "completeness_score": 4.0,
+        "latency_sec": 11.171,
+        "evidence_count": 12,
+        "answer_snippet": "Based **ONLY** on the provided Knowledge Graph evidence, here is the precise answer:\n\n**Key Operating Segments:**\nThe provided evidence **does not contain any information** regardi..."
+      },
+      "parallel_hybrid": {
+        "completeness_score": 2.0,
+        "latency_sec": 23.824,
+        "graph_triples": 10,
+        "vector_chunks": 3,
+        "total_evidence": 13,
+        "answer_snippet": "Based on the synthesis of the Knowledge Graph Structured Evidence and the SEC 10-K Filing Narrative Context, here is the analysis of Microsoft\u2019s disclosed financial metrics and the..."
+      }
+    },
+    {
+      "query_id": "HQ-3",
+      "query": "Which regulatory bodies oversee Apple's business operations and what antitrust or litigation disclosures are documented in SEC filings?",
+      "intent": "Hybrid (SEC/DOJ Regulatory Triples + Litigation Narrative)",
+      "vector_only": {
+        "completeness_score": 4.0,
+        "latency_sec": 16.809,
+        "evidence_count": 4,
+        "answer_snippet": "Based on the retrieved filing passages, there is **no information** provided regarding which regulatory bodies oversee Apple's business operations or any specific antitrust or liti..."
+      },
+      "graph_only": {
+        "completeness_score": 2.0,
+        "latency_sec": 9.064,
+        "evidence_count": 12,
+        "answer_snippet": "Based on the provided Knowledge Graph evidence, here are the regulatory bodies overseeing Apple (`aapl`) and the documented regulatory requirements:\n\n**Regulatory Bodies Overseeing..."
+      },
+      "parallel_hybrid": {
+        "completeness_score": 2.0,
+        "latency_sec": 17.503,
+        "graph_triples": 10,
+        "vector_chunks": 3,
+        "total_evidence": 13,
+        "answer_snippet": "Based on the synthesis of the Knowledge Graph Structured Evidence and the SEC 10-K Filing Narrative Context, here is the analysis of the regulatory oversight and legal disclosures ..."
+      }
+    },
+    {
+      "query_id": "HQ-4",
+      "query": "What are Microsoft's cloud server products and how do global market conditions and enterprise customer demand affect cloud revenue?",
+      "intent": "Hybrid (Cloud Segment Triples + Market Macro Narrative)",
+      "vector_only": {
+        "completeness_score": 0.0,
+        "latency_sec": 17.986,
+        "evidence_count": 4,
+        "answer_snippet": "Based on the retrieved filing passages, there is **no information** provided regarding Microsoft's specific cloud server products, global market conditions, or how enterprise custo..."
+      },
+      "graph_only": {
+        "completeness_score": 2.0,
+        "latency_sec": 11.262,
+        "evidence_count": 12,
+        "answer_snippet": "Based on the provided Knowledge Graph evidence, there is **no information** regarding Microsoft's cloud server products or the specific impact of global market conditions and enter..."
+      },
+      "parallel_hybrid": {
+        "completeness_score": 4.0,
+        "latency_sec": 16.692,
+        "graph_triples": 10,
+        "vector_chunks": 3,
+        "total_evidence": 13,
+        "answer_snippet": "Based on the synthesis of the Knowledge Graph Structured Evidence and the SEC 10-K Filing Narrative Context, here is the analysis of Microsoft\u2019s cloud server products and the facto..."
+      }
+    }
+  ],
+  "aggregate_summary": {
+    "avg_completeness_score": {
+      "vector_only": 3.75,
+      "graph_only": 3.25,
+      "parallel_hybrid": 3.25
+    },
+    "avg_latency_sec": {
+      "vector_only": 13.38,
+      "graph_only": 8.65,
+      "parallel_hybrid": 14.77
+    },
+    "hybrid_completeness_gain_vs_vector": "+-13.3%",
+    "hybrid_completeness_gain_vs_graph": "+0.0%",
+    "parallel_overhead": "+6.11s (Concurrent ThreadPool)"
+  }
+}

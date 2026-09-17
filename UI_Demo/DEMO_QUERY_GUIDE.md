@@ -47,6 +47,9 @@ python run_ui.py
 * **Copy Query:** `What is the general business description and principal products of Apple Inc?`
 * **What to Notice:** Compares Fast-Path Vector (0.29s) vs Full Graph Traversal (0.82s) $\rightarrow$ displays **-64% latency reduction**.
 
+### Query :
+`which key financial metrics does microsoft disclose in SEC reports?`
+
 ### Query 2: Hardware & Software Portfolio
 * **Copy Query:** `What are Apple's primary hardware and software product lines?`
 * **What to Notice:** Direct semantic passage retrieval answers in sub-second time without querying the database graph.
