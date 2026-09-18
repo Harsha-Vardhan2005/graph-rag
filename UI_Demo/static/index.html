@@ -16,20 +16,20 @@
       <div class="header-main">
         <div class="title-group">
           <h1>Financial GraphRAG</h1>
-          <span class="subtitle">Agentic Knowledge Graph RAG for Financial SEC 10-K Question Answering</span>
+          <!-- <span class="subtitle">Agentic Knowledge Graph RAG for Financial SEC 10-K Question Answering</span> -->
         </div>
-        <div class="scope-badge">
+        <!-- <div class="scope-badge">
           <span class="badge-dot"></span>
           <span>Indexed Scope: AAPL & MSFT (51,927 Triplets)</span>
         </div>
-      </div>
+      </div> -->
 
-      <!-- Navigation Tabs -->
-      <nav class="tab-nav">
-        <button class="tab-btn active" data-tab="explorer-tab">1. Unified Query Explorer</button>
-        <button class="tab-btn" data-tab="routing-tab">2. Adaptive Routing Inspector</button>
-        <button class="tab-btn" data-tab="formatting-tab">3. Structured Evidence Inspector</button>
-      </nav>
+        <!-- Navigation Tabs -->
+        <nav class="tab-nav">
+          <button class="tab-btn active" data-tab="explorer-tab">1. Unified Query Explorer</button>
+          <button class="tab-btn" data-tab="routing-tab">2. Adaptive Query Routing</button>
+          <button class="tab-btn" data-tab="formatting-tab">3. Structured Evidence Formatter</button>
+        </nav>
     </header>
 
     <!-- Main Content Area -->
@@ -41,7 +41,7 @@
         <div class="card control-card">
           <div class="card-header">
             <h3>Financial Query Input</h3>
-            <span class="hint">Type any custom question or select a verified benchmark prompt</span>
+            <!-- <span class="hint">Type any custom question or select a verified benchmark prompt</span> -->
           </div>
 
           <div class="input-wrapper">
@@ -143,7 +143,7 @@
       <section id="routing-tab" class="tab-content">
         <div class="card control-card">
           <div class="card-header">
-            <h3>Adaptive Routing & Topology Inspector</h3>
+            <h3>Adaptive Query Routing</h3>
             <span class="hint">Inspects Entity Extraction, Graph Connectivity Density, and PPR vs Vector Routing</span>
           </div>
           <div class="input-wrapper">
@@ -215,13 +215,13 @@
       <section id="formatting-tab" class="tab-content">
         <div class="card control-card">
           <div class="card-header">
-            <h3>Structured Evidence Formatting Ablation</h3>
+            <h3>Structured Evidence Formatting</h3>
             <span class="hint">Compare Raw Flat Graph Triples vs Typed Categorized Markdown Tables</span>
           </div>
           <div class="input-wrapper">
             <input type="text" id="format-ablation-input"
               value="Which key financial metrics does Microsoft disclose in its SEC reports?">
-            <button id="run-format-ablation-btn" class="btn btn-primary">Run Formatting Ablation</button>
+            <button id="run-format-ablation-btn" class="btn btn-primary">Compare Evidence Formats</button>
           </div>
         </div>
 

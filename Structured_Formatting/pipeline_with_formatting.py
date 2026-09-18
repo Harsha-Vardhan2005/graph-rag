@@ -120,7 +120,9 @@ Question: {query}"""
             "answer": resp.choices[0].message.content.strip(),
             "latency_sec": round(latency, 2),
             "evidence_count": len(retrieved),
-            "evidence_type": "text_passages"
+            "evidence_type": "text_passages",
+            "evidence_context_used": context,
+            "retrieved_chunks": retrieved
         }
 
     def _execute_graph_route(self, query: str, route_info: dict) -> dict:
@@ -270,7 +272,17 @@ Question: {query}"""
             "answer": resp.choices[0].message.content.strip(),
             "latency_sec": round(latency, 2),
             "calculation_summary": computed_summary,
-            "evidence_type": "symbolic_arithmetic"
+            "evidence_context_used": computed_summary,
+            "evidence_type": "symbolic_arithmetic",
+            "extracted_values": {
+                "ticker": ticker,
+                "metric": raw_metric.title(),
+                "year_start": y_start,
+                "value_start": v1,
+                "year_end": y_end,
+                "value_end": v2,
+                "growth_pct": growth if (v1 and v2 and v1 > 0) else None
+            }
         }
 
     def _retrieve_vector_chunks(self, query: str, top_k: int = 3) -> list:
@@ -354,24 +366,28 @@ Question: {query}"""
             retrieved_chunks = future_vec.result()
             graph_facts = future_graph.result()
 
-        # 1. Format Structured KG Evidence
-        if self.enable_structured_formatting and graph_facts:
-            formatted_graph_part = format_structured_evidence(graph_facts, query=query)
+        # 1. Format Structured KG Evidence (Top 4 PPR-ranked triples with entity types)
+        top_graph_facts = graph_facts[:4] if graph_facts else []
+        if self.enable_structured_formatting and top_graph_facts:
+            formatted_graph_part = format_structured_evidence(top_graph_facts, query=query)
         else:
-            formatted_graph_part = "\n".join(graph_facts) if graph_facts else "No direct relationship triples found."
+            formatted_graph_part = "\n".join(top_graph_facts) if top_graph_facts else "No direct relationship triples found."
 
-        # 2. Format Dense Narrative Passages
-        formatted_vec_part = "\n\n".join(
-            f"**[SEC 10-K Excerpt {i+1}]:** {c[:500]}..." 
-            for i, c in enumerate(retrieved_chunks)
-        )
+        # 2. Format Dense Narrative Passages (First 3 lines of top 2 chunks)
+        top_vec_chunks = retrieved_chunks[:2] if retrieved_chunks else []
+        passage_snippets = []
+        for i, c in enumerate(top_vec_chunks):
+            lines = [l.strip() for l in c.split('\n') if l.strip()]
+            snippet = "\n".join(lines[:3]) if len(lines) >= 3 else c[:240]
+            passage_snippets.append(f"> **Passage {i+1} (SEC 10-K Excerpt):**\n> *\"{snippet}...\"*")
+        formatted_vec_part = "\n\n".join(passage_snippets) if passage_snippets else "No narrative passages retrieved."
 
         # 3. Unified Hybrid Evidence Context (Structured KG Triples + Narrative Passages)
-        merged_evidence_context = f"""### 📊 Knowledge Graph Structured Evidence (Entity-Relation Triples):
+        merged_evidence_context = f"""#### 📊 Graph Evidence (Top PPR Triples with Entity Types)
 {formatted_graph_part}
 
 ---
-### 📄 SEC 10-K Filing Narrative Context (Disclosures & Explanations):
+#### 📄 Vector Passages (Top 2 SEC 10-K Chunks)
 {formatted_vec_part}"""
 
         # 4. Multi-Modal Financial Synthesis Prompt

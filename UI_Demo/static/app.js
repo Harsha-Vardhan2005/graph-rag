@@ -115,22 +115,92 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Evidence Rendering
-      if (routing.route === "GRAPH_MULTIHOP" && execution.evidence_context) {
-        evidenceViewer.innerHTML = marked.parse(execution.evidence_context);
-        evidenceCountBadge.textContent = `${execution.evidence_count} Facts`;
-      } else if (routing.route === "SYMBOLIC_COMPUTE" && execution.calculation_summary) {
+      if (routing.route === "SIMPLE_VECTOR") {
+        // For SIMPLE_VECTOR route: show top 2 retrieved text passage previews (first 3-4 lines each)
+        let passageHtml = "";
+        const chunks = execution.retrieved_chunks || [];
+        const topChunks = chunks.slice(0, 2);
+        
+        if (topChunks.length > 0) {
+          passageHtml = topChunks.map((chunk, idx) => {
+            const rawLines = chunk.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            const previewLines = rawLines.slice(0, 4).join('\n');
+            const previewText = previewLines.length > 0 ? previewLines : chunk.slice(0, 260);
+            return `
+              <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
+                <div style="font-weight: 600; font-size: 12px; color: #38bdf8; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                  <span>📄 SEC 10-K Excerpt Passage ${idx + 1}</span>
+                  <span style="font-size: 10px; background: rgba(56,189,248,0.15); color: #7dd3fc; padding: 2px 6px; border-radius: 3px;">Top Embedding Match</span>
+                </div>
+                <p style="font-size: 13px; line-height: 1.55; color: #cbd5e1; margin: 0; white-space: pre-line; font-style: italic;">"${previewText}..."</p>
+              </div>
+            `;
+          }).join("");
+        } else if (execution.evidence_context) {
+          passageHtml = marked.parse(execution.evidence_context);
+        } else {
+          passageHtml = `<p class="placeholder-text">No passages retrieved.</p>`;
+        }
+
         evidenceViewer.innerHTML = `
-          <h4>Deterministic Calculation Record</h4>
-          <pre class="code-block">${execution.calculation_summary}</pre>
-          <p><em>Symbolic arithmetic tool executed directly over verified filing records.</em></p>
+          <h4 style="color: #38bdf8; margin-bottom: 10px; font-size: 14px;">📄 Top Retrieved Text Passages</h4>
+          ${passageHtml}
+        `;
+        evidenceCountBadge.textContent = `${topChunks.length || execution.evidence_count || 2} Passages`;
+
+      } else if (routing.route === "GRAPH_MULTIHOP") {
+        // For GRAPH_MULTIHOP route: show top 4-5 PPR-ranked graph triples with entity types
+        evidenceViewer.innerHTML = `
+          <div class="graph-evidence-container">
+            <h4 style="color: #c084fc; margin-bottom: 10px; font-size: 14px;">🕸️ Top PPR-Ranked Graph Triples</h4>
+            ${marked.parse(execution.evidence_context || "No graph triples available.")}
+          </div>
+        `;
+        evidenceCountBadge.textContent = `${execution.evidence_count || 5} PPR Triples`;
+
+      } else if (routing.route === "HYBRID") {
+        // For HYBRID route: split left panel into two sections (Graph Evidence & Vector Passages)
+        evidenceViewer.innerHTML = `
+          <div class="hybrid-evidence-container">
+            ${marked.parse(execution.evidence_context || "No hybrid evidence available.")}
+          </div>
+        `;
+        evidenceCountBadge.textContent = `${execution.evidence_count || 6} Merged Facts`;
+
+      } else if (routing.route === "SYMBOLIC_COMPUTE") {
+        // For SYMBOLIC_COMPUTE route: show extracted metric values and the calculation summary
+        let metricBox = "";
+        const ev = execution.extracted_values;
+        if (ev && ev.metric) {
+          metricBox = `
+            <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(16,185,129,0.3); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
+              <div style="font-weight: 600; font-size: 11px; color: #34d399; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.05em;">
+                📊 Extracted SEC Filing Metric Values
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+                <div><span style="color: #94a3b8;">Entity:</span> <strong style="color: #f1f5f9;">${ev.ticker}</strong></div>
+                <div><span style="color: #94a3b8;">Metric:</span> <strong style="color: #f1f5f9;">${ev.metric}</strong></div>
+                <div><span style="color: #94a3b8;">FY${ev.year_start}:</span> <strong style="color: #38bdf8;">$${ev.value_start ? ev.value_start.toLocaleString() : '--'} M</strong></div>
+                <div><span style="color: #94a3b8;">FY${ev.year_end}:</span> <strong style="color: #38bdf8;">$${ev.value_end ? ev.value_end.toLocaleString() : '--'} M</strong></div>
+              </div>
+            </div>
+          `;
+        }
+
+        evidenceViewer.innerHTML = `
+          <div class="symbolic-evidence-container">
+            <h4 style="color: #34d399; margin-bottom: 10px; font-size: 14px;">🧮 Symbolic Computation Record</h4>
+            ${metricBox}
+            <div style="font-size: 12px; font-weight: 600; color: #94a3b8; margin-bottom: 6px;">Calculation Summary & Verification:</div>
+            <pre class="code-block" style="border-color: rgba(16,185,129,0.3); color: #6ee7b7; font-size: 13px; line-height: 1.5; padding: 12px;">${execution.calculation_summary || 'Formula evaluated over graph metric nodes.'}</pre>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 6px;"><em>Symbolic arithmetic tool executed directly over verified SEC filing records without probabilistic rounding.</em></p>
+          </div>
         `;
         evidenceCountBadge.textContent = "1 Verified Calculation";
+
       } else {
-        evidenceViewer.innerHTML = `
-          <h4>Dense Vector Text Passages</h4>
-          <p>Retrieved ${execution.evidence_count || 4} high-relevance chunks from Apple/Microsoft SEC 10-K filings using BGE-small embeddings.</p>
-        `;
-        evidenceCountBadge.textContent = `${execution.evidence_count || 4} Chunks`;
+        evidenceViewer.innerHTML = marked.parse(execution.evidence_context || "<p class='placeholder-text'>No evidence retrieved.</p>");
+        evidenceCountBadge.textContent = `${execution.evidence_count || 0} Sources`;
       }
 
       // Answer Rendering

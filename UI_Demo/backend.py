@@ -158,7 +158,9 @@ async def execute_query(req: QueryRequest):
             "evidence_count": exec_res.get("evidence_count", 0),
             "evidence_type": exec_res.get("evidence_type", selected_route.lower()),
             "evidence_context": evidence_context,
-            "calculation_summary": calc_summary
+            "calculation_summary": calc_summary,
+            "retrieved_chunks": exec_res.get("retrieved_chunks", []),
+            "extracted_values": exec_res.get("extracted_values", {})
         }
     }
 
